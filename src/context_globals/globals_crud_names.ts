@@ -30,7 +30,6 @@ export enum globals_crud_names {
 }
 
 
-
 export type ActionMap<M extends { [index: string]: any }> = {
     [Key in keyof M]: M[Key] extends undefined
         ? {
