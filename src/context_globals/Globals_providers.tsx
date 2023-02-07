@@ -77,19 +77,19 @@ interface Props {
 }
 
 const AppContext = createContext<{
-    state: globals_initial_state_type;
+    global_props: globals_initial_state_type;
     dispatch: Dispatch<SettingsActions | ShoppingCartActions>;
 }>({
-    state: initialState,
+    global_props: initialState,
     dispatch: () => null
 });
 
 
 const GlobalsProvider: React.FC<Props> = ({ children }): (React.ReactElement)=> {
-    const [state, dispatch] = useReducer(mainReducer, initialState);
+    const [global_props, dispatch] = useReducer(mainReducer, initialState);
 
     return (
-        <AppContext.Provider value={{ state, dispatch }}>
+        <AppContext.Provider value={{ global_props, dispatch }}>
             {children}
         </AppContext.Provider>
     );

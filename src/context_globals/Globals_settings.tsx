@@ -10,7 +10,7 @@ const Globals_settings = () => {
         name: "",
         price: '0'
     });
-    const { state ,dispatch } = React.useContext(AppContext);
+    const { global_props ,dispatch } = React.useContext(AppContext);
 
     const handleForm = (type: string, value: string) => {
         setForm(form => ({
@@ -58,7 +58,7 @@ const Globals_settings = () => {
             />
             <button onClick={createProduct}>create</button>
             <div style={{ marginTop: 20 }}>
-                {state.settings_array.map((c,ii) => (
+                {global_props.settings_array.map((c, ii) => (
                     <div key={ii}>
                         <span>{c.line_name} --- </span>
 
