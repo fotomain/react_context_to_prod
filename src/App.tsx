@@ -37,6 +37,12 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Test_Globals from "./context_globals/Test_Globals";
 
+//start_globals_from_todo
+import { Provider } from "./todo/context";
+import TodoList from "./todo/TodoList";
+import TodoForm from "./todo/TodoForm";
+
+
 setupIonicReact();
 
 
@@ -44,6 +50,18 @@ const App: React.FC = () => (
   <IonApp>
 
       <IonContent fullscreen>
+
+          eturn (
+          <Provider>
+              <div className="App">
+                  <TodoForm />
+                  <TodoList />
+                  <div className="rules">
+                      <p>Double click - complete task </p>
+                      <p>X - delete task</p>
+                  </div>
+              </div>
+          </Provider>
 
           {/*<TodoProvider>*/}
           {/*    <main className='App'>*/}
@@ -58,7 +76,7 @@ const App: React.FC = () => (
           {/*<App_To_Do/>*/}
 
           {/*globals start*/}
-          <Test_Globals/>
+          {/*<Test_Globals/>*/}
 
       </IonContent>
   </IonApp>
