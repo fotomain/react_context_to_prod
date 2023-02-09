@@ -1,7 +1,7 @@
 
 import {SettingsActions, globals_settings_element_type, ShoppingCartActions, globals_crud_names} from "./globals_crud_names";
 
-export const productReducer = (
+export const globals_props_Reducer = (
     globals_data: globals_settings_element_type[],
     activity: SettingsActions | ShoppingCartActions
 ) => {

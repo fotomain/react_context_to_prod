@@ -12,7 +12,8 @@ const Globals_counter = () => {
       <button
         onClick={()=>{
           dispatch({
-            type: globals_crud_names.Add
+                  type: globals_crud_names.Add,
+              // data_set:{a:1,b:2}
           });
         }}
       >

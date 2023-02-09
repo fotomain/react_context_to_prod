@@ -23,9 +23,9 @@ export type globals_initial_state_type = {
 
 export enum globals_crud_names {
 
-    Create  = "CREATE_SETTING_LINE",
-    Delete  = "DELETE_SETTING_LINE",
-    Add     = "ADD_SETTING_LINE"
+        Create  = "CREATE_SETTING_LINE",
+        Delete  = "DELETE_SETTING_LINE",
+        Add     = "ADD_SETTING_LINE"
 
 }
 
@@ -45,6 +45,7 @@ export type SettingsActions = ActionMap< globals_crud_actions_type >[ keyof Acti
 
 export type ShoppingCartPayload = {
     [globals_crud_names.Add]: undefined;
+    // data_set:any;
 };
 
 export type ShoppingCartActions = ActionMap< ShoppingCartPayload >[keyof ActionMap< ShoppingCartPayload >];

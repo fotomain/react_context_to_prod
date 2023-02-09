@@ -2,7 +2,7 @@
 
 import React, {createContext, Dispatch, useReducer} from "react";
 import {initialStateType, globals_initial_state_type, SettingsActions, ShoppingCartActions} from "./globals_crud_names";
-import {productReducer, shoppingCartReducer} from "./globals_reducers";
+import {globals_props_Reducer, shoppingCartReducer} from "./globals_reducers";
 
 
 
@@ -68,7 +68,7 @@ const mainReducer = (
     { settings_array, shoppingCart }: globals_initial_state_type,
     action: SettingsActions | ShoppingCartActions
 ) => ({
-    settings_array: productReducer(settings_array, action),
+    settings_array: globals_props_Reducer(settings_array, action),
     shoppingCart: shoppingCartReducer(shoppingCart, action)
 });
 
