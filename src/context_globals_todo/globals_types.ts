@@ -1,11 +1,7 @@
 
 export interface ITodosActions {
     type: "TOGGLE_TODO" | "DELETE_TODO" | "ADD_TODO";
-    payload: {
-        id?: string;
-        completed?: boolean;
-        text?: string;
-    };
+    payload: ITodos;
 }
 
 export interface ITodosContext {
@@ -21,4 +17,5 @@ export interface ITodos {
     id?: string;
     text?: string;
     completed?: boolean;
+    is_active: boolean;
 }

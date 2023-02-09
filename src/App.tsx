@@ -35,12 +35,13 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Test_Globals from "./context_globals/Test_Globals";
+import Test_Globals from "./z_context_globals/Test_Globals";
 
 //start_globals_from_todo
-import { Provider } from "./todo/context";
-import TodoList from "./todo/TodoList";
-import TodoForm from "./todo/TodoForm";
+
+import { Provider } from "./context_globals_todo/context";
+import TodoList from "./context_globals_todo/TodoList";
+import TodoForm from "./context_globals_todo/TodoForm";
 
 
 setupIonicReact();

@@ -11,12 +11,14 @@ const TodoList: React.FC<{}> = () => {
                 return (
                     <div
                         key={item.id}
-                        onDoubleClick={() =>
-                            dispatch({ type: "TOGGLE_TODO", payload: item })
+                        onDoubleClick={() => {
+                            console.log("=== payload", item)
+                            dispatch({type: "TOGGLE_TODO", payload: item})
+                        }
                         }
                     >
             <div
-                 style={{textDecoration: (item.completed) ? "line-through":""}}
+                 style={{backgroundColor: (item.completed) ? "yellow":"pink"}}
             >
               {item.text}
             </div>
