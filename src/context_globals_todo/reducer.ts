@@ -1,11 +1,11 @@
 
 
 
-import { ITodosActions, ITodosState } from "./globals_types";
+import { ITodosActions, TGloabal_props } from "./globals_types";
 export default function todosReducer(
-    state: ITodosState,
+    state: TGloabal_props,
     action: ITodosActions
-): ITodosState {
+): TGloabal_props {
     switch (action.type) {
         case "TOGGLE_TODO": {
             const toggledTodo = state.todos.map(item => {

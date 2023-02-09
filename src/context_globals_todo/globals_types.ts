@@ -1,19 +1,19 @@
 
 export interface ITodosActions {
     type: "TOGGLE_TODO" | "DELETE_TODO" | "ADD_TODO";
-    payload: ITodos;
+    payload: T1_todo;
 }
 
-export interface ITodosContext {
-    state: ITodosState;
+export interface TGloabal_context {
+    state: TGloabal_props;
     dispatch: React.Dispatch<ITodosActions>;
 }
 
-export interface ITodosState {
-    todos: Array<ITodos>;
+export interface TGloabal_props {
+    todos: Array<T1_todo>;
 }
 
-export interface ITodos {
+export interface T1_todo {
     id?: string;
     text?: string;
     completed?: boolean;
