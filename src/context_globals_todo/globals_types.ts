@@ -6,7 +6,7 @@ export interface ITodosActions {
 
 export interface TGloabal_context {
     global_props: TGloabal_props;
-    dispatch: React.Dispatch<ITodosActions>;
+    global_dispatch: React.Dispatch<ITodosActions>;
 }
 
 export interface TGloabal_props {

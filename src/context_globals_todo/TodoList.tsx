@@ -3,7 +3,7 @@ import * as React from "react";
 
 import { Context } from "./context";
 const TodoList: React.FC<{}> = () => {
-    const { global_props, dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Context);
     return (
         <div className="gridItems">
             {global_props.todos.map(item => {
@@ -13,7 +13,7 @@ const TodoList: React.FC<{}> = () => {
                         key={item.id}
                         onDoubleClick={() => {
                             console.log("=== payload", item)
-                            dispatch({type: "TOGGLE_TODO", payload: item})
+                            global_dispatch({type: "TOGGLE_TODO", payload: item})
                         }
                         }
                     >
@@ -22,7 +22,7 @@ const TodoList: React.FC<{}> = () => {
             >
               {item.text}
             </div>
-                        <i onClick={() => dispatch({ type: "DELETE_TODO", payload: item })}>
+                        <i onClick={() => global_dispatch({ type: "DELETE_TODO", payload: item })}>
                             X
                         </i>
                     </div>

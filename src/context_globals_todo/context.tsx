@@ -13,8 +13,8 @@ interface IProps {
 }
 
 export function Provider(props: IProps) {
-    const [global_props, dispatch] = React.useReducer(userReducer, { todos });
+    const [global_props, global_dispatch] = React.useReducer(userReducer, { todos });
 
-    const value = { global_props, dispatch };
+    const value = { global_props, global_dispatch };
     return <Context.Provider value={value}>{props.children}</Context.Provider>;
 }
