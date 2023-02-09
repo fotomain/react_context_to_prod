@@ -6,6 +6,11 @@ const TodoList: React.FC<{}> = () => {
     const { global_props, global_dispatch } = React.useContext(Context);
     return (
         <div className="gridItems">
+
+            <br/>
+            <div>{global_props.current_user.email}</div>
+            <br/>
+
             {global_props.todos.map(item => {
                 console.log(item);
                 return (
