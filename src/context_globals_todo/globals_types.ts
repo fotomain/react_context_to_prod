@@ -1,7 +1,7 @@
 
 export interface ITodosActions {
-    type: "TOGGLE_TODO" | "DELETE_TODO" | "ADD_TODO";
-    payload: T1_todo;
+    type: "SETTER_USER" | "TOGGLE_TODO" | "DELETE_TODO" | "ADD_TODO";
+    global_new_data: T1_todo | any;
 }
 
 export interface TGloabal_context {

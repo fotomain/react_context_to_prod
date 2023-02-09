@@ -7,7 +7,7 @@ export default function() {
     let handleSubmit = (event: React.MouseEvent<HTMLFormElement>): void => {
         event.preventDefault();
         global_dispatch({ type: "ADD_TODO",
-            payload: {
+            global_new_data: {
                 text: todo,
                 id: (Math.random()*10000).toString(),
                 completed: false,
