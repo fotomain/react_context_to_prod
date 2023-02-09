@@ -18,7 +18,7 @@ export default function todosReducer(
             });
             return {
                 ...state,
-                todos: toggledTodo
+                todos: toggledTodo,
             };
         }
         case "DELETE_TODO": {

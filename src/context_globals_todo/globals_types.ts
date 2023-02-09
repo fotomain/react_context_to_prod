@@ -9,8 +9,14 @@ export interface TGloabal_context {
     global_dispatch: React.Dispatch<ITodosActions>;
 }
 
+export class C1_current_user {
+    email:string='';
+    is_signed_in:boolean=false;
+}
+
 export interface TGloabal_props {
     todos: Array<T1_todo>;
+    current_user:C1_current_user;
 }
 
 export interface T1_todo {
