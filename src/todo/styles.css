@@ -1,0 +1,29 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    display: grid;
+    grid-template-areas:
+    "header header header"
+    "rules todo todo";
+}
+
+.gridItems {
+    grid-area: todo;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.gridItems > div {
+    background-color: gold;
+}
+
+.form {
+    padding-bottom: 20px;
+    grid-area: header;
+}
+
+.rules {
+    grid-area: rules;
+}
