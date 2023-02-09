@@ -37,11 +37,11 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Test_Globals from "./z_context_globals/Test_Globals";
 
-//start_globals_from_todo
+//start_globals_from_logrec
 
-import { Provider } from "./context_globals_todo/context";
-import TodoList from "./context_globals_todo/TodoList";
-import TodoForm from "./context_globals_todo/TodoForm";
+import { Globals_Provider } from "./context_globals_logrec/context";
+import LogrecList from "./context_globals_logrec/LogrecList";
+import LogrecForm from "./context_globals_logrec/LogrecForm";
 
 
 setupIonicReact();
@@ -53,24 +53,24 @@ const App: React.FC = () => (
       <IonContent fullscreen>
 
           eturn (
-          <Provider>
+          <Globals_Provider>
               <div className="App">
-                  <TodoForm />
-                  <TodoList />
+                  <LogrecForm />
+                  <LogrecList />
                   <div className="rules">
-                      <p>Double click - complete task </p>
-                      <p>X - delete task</p>
+                      <p>Double click - complete log </p>
+                      <p>X - delete log</p>
                   </div>
               </div>
-          </Provider>
+          </Globals_Provider>
 
-          {/*<TodoProvider>*/}
+          {/*<LogrecProvider>*/}
           {/*    <main className='App'>*/}
-          {/*        <h1>My Todos</h1>*/}
-          {/*        <AddTodo />*/}
-          {/*        <Todos />*/}
+          {/*        <h1>My Logrecs</h1>*/}
+          {/*        <AddLogrec />*/}
+          {/*        <Logrecs />*/}
           {/*    </main>*/}
-          {/*</TodoProvider>*/}
+          {/*</LogrecProvider>*/}
 
           {/*<Home />*/}
 

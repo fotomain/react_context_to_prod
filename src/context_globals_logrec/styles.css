@@ -4,11 +4,11 @@
     display: grid;
     grid-template-areas:
     "header header header"
-    "rules todo todo";
+    "rules logrec logrec";
 }
 
 .gridItems {
-    grid-area: todo;
+    grid-area: logrec;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;

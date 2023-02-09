@@ -2,7 +2,7 @@ import * as React from "react";
 import userReducer from "./reducer";
 import {TGloabal_context} from "./globals_types";
 import {initial_setings} from "./globals_initial_setings";
-const initial_todos = [
+const initial_logrecs = [
     { id: "1", text: "First", completed: false, is_active:false },
     { id: "2", text: "Second", completed: true, is_active:false },
 ];
@@ -20,9 +20,9 @@ interface IProps {
     children?: React.ReactChild;
 }
 
-export function Provider(props: IProps) {
+export function Globals_Provider(props: IProps) {
     const [global_props, global_dispatch] = React.useReducer(userReducer, {
-        todos:initial_todos,
+        logrecs:initial_logrecs,
         // current_user:initial_user
         current_user:initial_setings.current_user
     });

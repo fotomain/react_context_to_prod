@@ -1,8 +1,8 @@
-// codesandbox typescript react context reducer todo app
+// codesandbox typescript react context reducer logrec app
 import * as React from "react";
 
 import { Context } from "./context";
-const TodoList: React.FC<{}> = () => {
+const LogrecList: React.FC<{}> = () => {
     const { global_props, global_dispatch } = React.useContext(Context);
     return (
         <div className="gridItems">
@@ -18,7 +18,7 @@ const TodoList: React.FC<{}> = () => {
             }}>CHANGE{global_props.current_user.email}</button>
             <br/>
 
-            {global_props.todos.map(item => {
+            {global_props.logrecs.map(item => {
                 console.log(item);
                 return (
                     <div
@@ -44,4 +44,4 @@ const TodoList: React.FC<{}> = () => {
     );
 };
 
-export default TodoList;
+export default LogrecList;
