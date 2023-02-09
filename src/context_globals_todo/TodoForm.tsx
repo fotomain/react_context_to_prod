@@ -3,7 +3,7 @@ import { Context } from "./context";
 
 export default function() {
     const [todo, setTodo] = React.useState("");
-    const { state, dispatch } = React.useContext(Context);
+    const { global_props, dispatch } = React.useContext(Context);
     let handleSubmit = (event: React.MouseEvent<HTMLFormElement>): void => {
         event.preventDefault();
         dispatch({ type: "ADD_TODO",

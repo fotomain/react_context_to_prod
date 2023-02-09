@@ -3,10 +3,10 @@ import * as React from "react";
 
 import { Context } from "./context";
 const TodoList: React.FC<{}> = () => {
-    const { state, dispatch } = React.useContext(Context);
+    const { global_props, dispatch } = React.useContext(Context);
     return (
         <div className="gridItems">
-            {state.todos.map(item => {
+            {global_props.todos.map(item => {
                 console.log(item);
                 return (
                     <div
