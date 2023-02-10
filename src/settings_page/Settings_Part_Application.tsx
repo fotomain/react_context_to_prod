@@ -10,16 +10,18 @@ import PersonPinIcon from '@mui/icons-material/PersonPin';
 import {Box, TextField} from "@mui/material";
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import {a11yProps, TabPanel} from "./MUITools";
+import {Context} from "../context_globals_logrec/context";
 
 const Settings_Part_Application: React.FC = () => {
+
+    const { global_props, global_dispatch } = React.useContext(Context);
 
     const [tab_value, set_tab_value] = React.useState(0);
 
     const [state, setState] = React.useState({
-        application_name: 'My Posts App',
+        application_name:  global_props.current_application.name,
+        // 'My Posts App',
     });
-
-
 
 
     const onChangeInput = (event: any) => {

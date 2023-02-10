@@ -26,7 +26,8 @@ export function Globals_Provider(props: IProps) {
     const [global_props, global_dispatch] = React.useReducer(userReducer, {
         logrecs:initial_logrecs,
         // current_user:initial_user
-        current_user:initial_setings.current_user
+        current_user:initial_setings.current_user,
+        current_application:initial_setings.current_application
     });
 
     const value = { global_props, global_dispatch };
