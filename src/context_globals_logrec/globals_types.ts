@@ -1,6 +1,10 @@
 
 export interface ILogrecsActions {
-    type: "SETTER_USER" | "TOGGLE_TODO" | "DELETE_TODO" | "ADD_TODO";
+    type:     "SETTER_USER"
+            | "SETTER_APPLICATION"
+            | "TOGGLE_TODO"
+            | "DELETE_TODO"
+            | "ADD_TODO";
     global_new_data: T1_logrec | any;
 }
 

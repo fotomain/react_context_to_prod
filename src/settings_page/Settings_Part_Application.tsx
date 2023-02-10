@@ -19,16 +19,28 @@ const Settings_Part_Application: React.FC = () => {
     const [tab_value, set_tab_value] = React.useState(0);
 
     const [state, setState] = React.useState({
-        application_name:  global_props.current_application.name,
+        'current_application.name':  global_props.current_application.name,
         // 'My Posts App',
     });
 
 
     const onChangeInput = (event: any) => {
+        const tname = event.target.name
+        const tvalue = event.target.value
         setState({
             ...state,
-            [event.target.name]: event.target.value
+            [tname]: tvalue
         });
+
+        if('current_application.name'==tname){
+            const tdata = global_props.current_application
+            tdata.name = tvalue
+            global_dispatch({
+                type: 'SETTER_APPLICATION',
+                global_new_data:{current_application:tdata},
+            })
+        }
+
     };
 
     const onChangeTab = (event: React.SyntheticEvent, newValue: number) => {
@@ -39,6 +51,8 @@ const Settings_Part_Application: React.FC = () => {
     return (
 <div>
       <Box>
+
+          <p>global_props.current_application.name {global_props.current_application.name}</p>
 
           <Tabs value={tab_value} onChange={onChangeTab} aria-label="icon label tabs example">
               <Tab icon={<FavoriteIcon />} label="NAME"  {...a11yProps(0)} />
@@ -56,40 +70,11 @@ const Settings_Part_Application: React.FC = () => {
                   id="outlined-required"
                   label="Application name"
                   // defaultValue="My Posts App"
-                  name={'application_name'}
-                  value={state.application_name}
+                  name={'current_application.name'}
+                  value={state['current_application.name']}
                   onChange={(e)=>onChangeInput(e)}
               />
-              <TextField
 
-                  required
-                  id="outlined-required"
-                  label="Application name"
-                  defaultValue="Best Posts"
-                  name={'application_name'}
-                  value={state.application_name}
-                  onChange={(e)=>onChangeInput(e)}
-              />
-              <TextField
-
-                  required
-                  id="outlined-required"
-                  label="Application name"
-                  defaultValue="Best Posts"
-                  name={'application_name'}
-                  value={state.application_name}
-                  onChange={(e)=>onChangeInput(e)}
-              />
-              <TextField
-
-                  required
-                  id="outlined-required"
-                  label="Application name"
-                  defaultValue="Best Posts"
-                  name={'application_name'}
-                  value={state.application_name}
-                  onChange={(e)=>onChangeInput(e)}
-              />
           </TabPanel>
           <TabPanel value={tab_value} index={1} >
               Item Two
