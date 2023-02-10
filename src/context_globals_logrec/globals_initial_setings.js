@@ -19,4 +19,5 @@ initial_setings.current_user.email='ssssss@bb.cc'
 initial_setings.current_user.first_name='not_defined'
 initial_setings.current_user.laxt_name='not_defined'
 
+initial_setings.current_user.layout.background_type='default' // image, color
 initial_setings.current_user.layout.background_color='green'

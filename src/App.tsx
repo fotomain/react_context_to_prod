@@ -9,9 +9,9 @@
 
 // npm install --save-dev @types/styled-components-react-native
 
-import React, {ReactNode} from 'react';
+import React, {useEffect} from 'react';
 
-import { Redirect, Route } from 'react-router-dom';
+
 import {IonApp, IonContent, IonRouterOutlet, setupIonicReact} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
@@ -43,44 +43,136 @@ import { Globals_Provider } from "./context_globals_logrec/context";
 import LogrecList from "./context_globals_logrec/LogrecList";
 import LogrecForm from "./context_globals_logrec/LogrecForm";
 
+import './App.css'
 
 setupIonicReact();
 
+const style1 = { "--background": 'url(' + require('./images_app/bkg3.jpg') + ')' } as React.CSSProperties;
 
-const App: React.FC = () => (
-  <IonApp>
+// js set :root var with querySelector
+// document.documentElement.style.setProperty(
+//     'background',
+//     'url(' + require('./images_app/bkg3.jpg') + ')');
+//
+// document.documentElement.style.setProperty(
+//     'background-size',
+//     'cover');
 
-      <IonContent fullscreen>
 
-          eturn (
-          <Globals_Provider>
-              <div className="App">
-                  <LogrecForm />
-                  <LogrecList />
-                  <div className="rules">
-                      <p>Double click - complete log </p>
-                      <p>X - delete log</p>
-                  </div>
-              </div>
-          </Globals_Provider>
 
-          {/*<LogrecProvider>*/}
-          {/*    <main className='App'>*/}
-          {/*        <h1>My Logrecs</h1>*/}
-          {/*        <AddLogrec />*/}
-          {/*        <Logrecs />*/}
-          {/*    </main>*/}
-          {/*</LogrecProvider>*/}
 
-          {/*<Home />*/}
 
-          {/*<App_To_Do/>*/}
+// const root = document.querySelector(':root');
+// if(root) {
+//     root.style.setProperty('--background', 'blue');
+// }
 
-          {/*globals start*/}
-          {/*<Test_Globals/>*/}
+const App: React.FC = () => {
 
-      </IonContent>
-  </IonApp>
-);
+    useEffect(() => {
+
+        // const root1 = document.getElementById('root')
+        // console.log("=== root1 1",root1)
+        // root1?.style.setProperty('color', 'blue')
+        // if(root1) {
+        //     console.log("=== root1 2")
+        //     root1.style.setProperty('background', 'blue');
+        // }
+
+        const root2 = document.getElementById('toot');
+        if(root2){
+            console.log(root2)
+            // root2.style.setProperty('--background', 'blue')
+            root2.style.setProperty('--background', 'url(' + require('./images_app/bkg3.jpg') + ') no-repeat center / cover ')
+            // root.style.setProperty('--background', 'blue');
+        }
+
+        return () => {
+
+        };
+    }, [ ]);
+
+
+    return (
+
+        <div className="App111"
+
+        >
+
+            <IonApp>
+                {/*<div className="App111"*/}
+
+                {/*     style={{*/}
+                {/*         backgroundRepeat: "no-repeat",*/}
+                {/*         // backgroundImage: 'url(' + bkg_app + ')'*/}
+                {/*         // no-repeat center / cover*/}
+                {/*         backgroundPosition:'center',*/}
+                {/*         background:'center',*/}
+                {/*         // backgroundSize:'100% 100%',*/}
+                {/*         backgroundSize:'cover',*/}
+                {/*         backgroundImage: 'url(' + require('./images_app/bkg3.jpg') + ') ',*/}
+
+                {/*         display:'flex',*/}
+                {/*         flexDirection:'column',*/}
+                {/*         justifyContent:'space-between',*/}
+                {/*         alignItems:'top',*/}
+                {/*     }}*/}
+                {/*>*/}
+
+                <IonContent fullscreen id={'toot'}
+
+
+                    // style={{
+                    //     "--background-repeat": "no-repeat",
+                    //     "--background-position": "center",
+                    //     // backgroundRepeat: "no-repeat",
+                    //     // backgroundImage: 'url(' + bkg_app + ')'
+                    //     "background-size":'100% 100%',
+                    //     // backgroundImage: 'url(' + require('./images_app/bkg3.jpg') + ')',
+                    //     "--background": 'url(' + require('./images_app/bkg3.jpg') + ')',
+                    //
+                    //     display:'flex',
+                    //     flexDirection:'column',
+                    //     justifyContent:'space-between',
+                    //     alignItems:'top',
+                    //     }}
+
+                >
+
+
+                    <Globals_Provider>
+                        <div className="App">
+                            <LogrecForm/>
+                            <LogrecList/>
+                            <div className="rules">
+                                <p>Double click - complete log </p>
+                                <p>X - delete log</p>
+                            </div>
+                        </div>
+                    </Globals_Provider>
+
+
+                    {/*<LogrecProvider>*/}
+                    {/*    <main className='App'>*/}
+                    {/*        <h1>My Logrecs</h1>*/}
+                    {/*        <AddLogrec />*/}
+                    {/*        <Logrecs />*/}
+                    {/*    </main>*/}
+                    {/*</LogrecProvider>*/}
+
+                    {/*<Home />*/}
+
+                    {/*<App_To_Do/>*/}
+
+                    {/*globals start*/}
+                    {/*<Test_Globals/>*/}
+
+                </IonContent>
+                {/*</div>*/}
+
+            </IonApp>
+        </div>
+    )
+};
 
 export default App;

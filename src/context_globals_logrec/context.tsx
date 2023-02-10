@@ -1,3 +1,5 @@
+
+
 import * as React from "react";
 import userReducer from "./reducer";
 import {TGloabal_context} from "./globals_types";
@@ -11,8 +13,8 @@ const initial_logrecs = [
 // initial_user.email = 'aa@bb.cc'
 // initial_user.is_signed_in = false
 
-let initial_user = {email:'aa'}
-initial_user.email  = 'bb';
+// let initial_user = {email:'aa'}
+// initial_user.email  = 'bb';
 
 export const Context = React.createContext({} as TGloabal_context);
 
