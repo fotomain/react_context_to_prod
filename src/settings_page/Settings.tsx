@@ -21,15 +21,15 @@ const Settings: React.FC = () => {
 
     return (
 
-    <IonPage>
-      <IonHeader>
+    <div>
+      <div>
 
-        <IonToolbar>
-          <IonTitle>Settings</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+        {/*<IonToolbar>*/}
+        {/*  <IonTitle>Settings</IonTitle>*/}
+        {/*</IonToolbar>*/}
+      </div>
 
-      <IonContent fullscreen>
+      <div>
           <Box id={'box1'}
               sx={{ flexGrow: 1, display: 'flex',
                   bgcolor: 'background.paper',
@@ -76,8 +76,8 @@ const Settings: React.FC = () => {
               </TabPanel>
           </Box>
 
-      </IonContent>
-    </IonPage>
+      </div>
+    </div>
   );
 };
 

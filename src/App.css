@@ -2,7 +2,24 @@
 /*    --background: url('./images_app/bkg3.jpg') no-repeat center / cover ;*/
 /*}*/
 
+.body {
+    margin: 0px;
+    height: 100%;
+}
+
+.div_full_screen {
+    /*height: 100vh;*/
+    /*background: url('./images_app/bkg3.jpg') no-repeat center / cover ;*/
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+
+}
+
 ion-content {
+    --background:none;
     /*--background: url('./images_app/bkg3.jpg') no-repeat center / cover ;*/
     /*--background: blue;*/
 }

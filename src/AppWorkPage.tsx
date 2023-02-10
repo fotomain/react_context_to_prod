@@ -45,36 +45,75 @@ import LogrecForm from "./context_globals_logrec/LogrecForm";
 
 import './App.css'
 import Settings from "./settings_page/Settings";
-import AppWorkPage from "./AppWorkPage";
 
 setupIonicReact();
 
+const style1 = { "--background": 'url(' + require('./images_app/bkg3.jpg') + ')' } as React.CSSProperties;
 
-const Div1: React.FC = () => {
+// js set :root var with querySelector
+// document.documentElement.style.setProperty(
+//     'background',
+//     'url(' + require('./images_app/bkg3.jpg') + ')');
+//
+// document.documentElement.style.setProperty(
+//     'background-size',
+//     'cover');
+
+
+
+
+
+// const root = document.querySelector(':root');
+// if(root) {
+//     root.style.setProperty('--background', 'blue');
+// }
+
+const AppWorkPage: React.FC = () => {
+
+
 
     return (
 
-        <IonApp className={'div_full_screen'}
 
-                style={{
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover", //!!! NO VISUAL DISTORTINOS
-                    // backgroundSize:'100% 100%',
-                    backgroundPosition: "center",
-                    // no-repeat center / cover
+                <IonContent id={'toot'}
 
-                    backgroundImage: 'url(' + require('./images_app/bkg3.jpg') + ')',
+                >
 
-                    display:'flex',
-                    flexDirection:'column',
-                    justifyContent:'space-between',
-                    alignItems:'top',
-                    }}
-            >
-                <AppWorkPage/>
-            </IonApp>
+
+                    <Globals_Provider>
+                        <div className="App">
+                            <LogrecForm/>
+                            <LogrecList/>
+                            <div className="rules">
+                                <p>Double click - complete log </p>
+                                <p>X - delete log</p>
+                            </div>
+                            <Settings />
+                        </div>
+                    </Globals_Provider>
+
+
+                    {/*<LogrecProvider>*/}
+                    {/*    <main className='AppWorkPage'>*/}
+                    {/*        <h1>My Logrecs</h1>*/}
+                    {/*        <AddLogrec />*/}
+                    {/*        <Logrecs />*/}
+                    {/*    </main>*/}
+                    {/*</LogrecProvider>*/}
+
+                    {/*<Home />*/}
+
+                    {/*<App_To_Do/>*/}
+
+                    {/*globals start*/}
+                    {/*<Test_Globals/>*/}
+
+
+
+                </IonContent>
+
 
     )
 };
 
-export default Div1;
+export default AppWorkPage;
