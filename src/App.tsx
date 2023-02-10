@@ -44,6 +44,7 @@ import LogrecList from "./context_globals_logrec/LogrecList";
 import LogrecForm from "./context_globals_logrec/LogrecForm";
 
 import './App.css'
+import Settings from "./settings_page/Settings";
 
 setupIonicReact();
 
@@ -94,10 +95,6 @@ const App: React.FC = () => {
 
 
     return (
-
-        <div className="App111"
-
-        >
 
             <IonApp>
                 {/*<div className="App111"*/}
@@ -170,8 +167,10 @@ const App: React.FC = () => {
                 </IonContent>
                 {/*</div>*/}
 
+                <Settings />
+
             </IonApp>
-        </div>
+
     )
 };
 
