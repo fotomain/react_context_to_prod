@@ -2,9 +2,11 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 
 export interface TabPanelProps {
+    // other?: any;
     children?: React.ReactNode;
     index: number;
     value: number;
+    // id?:string;
 }
 
 export const TabPanel = (props: TabPanelProps) => {
@@ -19,10 +21,10 @@ export const TabPanel = (props: TabPanelProps) => {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    {/*<Typography>*/}
+                <Box {...other}>
+
                     {children}
-                    {/*</Typography>*/}
+
                 </Box>
             )}
         </div>

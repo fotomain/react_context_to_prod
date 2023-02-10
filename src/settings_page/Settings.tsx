@@ -7,7 +7,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Settings_Application from "./Settings_Application";
+import Settings_Part_Application from "./Settings_Part_Application";
 import {a11yProps, TabPanel} from "./MUITools";
 
 const Settings: React.FC = () => {
@@ -21,13 +21,6 @@ const Settings: React.FC = () => {
 
     return (
 
-    <div>
-      <div>
-
-        {/*<IonToolbar>*/}
-        {/*  <IonTitle>Settings</IonTitle>*/}
-        {/*</IonToolbar>*/}
-      </div>
 
       <div>
           <Box id={'box1'}
@@ -53,7 +46,7 @@ const Settings: React.FC = () => {
               </Tabs>
               <TabPanel value={value} index={0}>
                   <div>
-                      <Settings_Application/>
+                      <Settings_Part_Application/>
                   </div>
               </TabPanel>
               <TabPanel value={value} index={1}>
@@ -77,7 +70,7 @@ const Settings: React.FC = () => {
           </Box>
 
       </div>
-    </div>
+
   );
 };
 
