@@ -31,7 +31,9 @@ const Settings_Part_Application: React.FC = () => {
 
     const [state, setState] = React.useState({
         'current_application.title.text':  global_props.current_application.title.text,
+        'current_application.title.mode_position':  global_props.current_application.title.mode_position,
         'current_application.title.mode_show':  global_props.current_application.title.mode_show,
+        // is_disabled:true,
         // 'My Posts App',
     });
 
@@ -66,31 +68,30 @@ const Settings_Part_Application: React.FC = () => {
         console.log(t_ev_type)
         if(t_ev_type=="left"){
             console.log('=== go left' )
-            setState({...state, ['current_application.title.mode_show']: 'left'})
+            setState({...state, ['current_application.title.mode_position']: 'left'})
         }
         else{
             console.log('=== go right' )
-            setState({...state, ['current_application.title.mode_show']: 'right'})
+            setState({...state, ['current_application.title.mode_position']: 'right'})
         }
 
         const tdata = global_props.current_application
-        tdata.title.mode_show = t_ev_type
+        tdata.title.mode_position = t_ev_type
         global_dispatch({
             type: 'SETTER_APPLICATION',
             global_new_data:{current_application:tdata},
         })
 
-
-
-
     }
+
+
 
     return (
 <div>
       <Box>
 
           <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
-          <p>global_props.current_application.title.mode_show {global_props.current_application.title.mode_show}</p>
+          <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
           <p>state {JSON.stringify(state)}</p>
 
           <Tabs value={tab_value} onChange={onChangeTab} aria-label="icon label tabs example">
@@ -101,7 +102,7 @@ const Settings_Part_Application: React.FC = () => {
 
           {/*id={'panel1'}*/}
           <TabPanel value={tab_value} index={0}  >
-              <Box sx={{marginLeft:'24px' , marginTop:'24px' }} >
+              <Box  sx={{marginLeft:'24px' , marginTop:'24px' }} >
 
               <FormControl  component="fieldset" variant="standard">
                   <FormLabel component="legend">Title settings</FormLabel>
@@ -112,42 +113,82 @@ const Settings_Part_Application: React.FC = () => {
                       <FormControlLabel
                           control={
                               // <Switch checked={state.mode_show} onChange={handleChange} name="slides_mirrored" />
-                              <Switch  />
+                              <Switch checked={state['current_application.title.mode_show']}
+                                  onChange={(e)=>{
+                                  console.log(e)
+                                  setState({...state, 'current_application.title.mode_show': !state['current_application.title.mode_show']})
+                              }}  />
                           }
                           label="Show"
                       />
 
-                      <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
+                      <fieldset disabled={!state['current_application.title.mode_show']}
+                                style={
+                                    {
+                                        border:'none',
+                                        display:'flex',
+                                        flexDirection:'column',
+                                        justifyContent:'top',
+                                        alignItems:'left',
+                                    }
+                                }
+                      >
 
-                              <TextField
-                                  required
-                                  variant={'standard'}
-                                  id="outlined-required"
-                                  label="Title text"
-                                  name={'current_application.title.text'}
-                                  value={state['current_application.title.text']}
-                                  onChange={(e)=>onChangeInput(e)}
-                              />
+                          <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
 
-                      <FormControl style={{marginTop:'4px'}}component="fieldset">
-                          <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
-                                      onChange={onChange_left_right}
-                                      // defaultValue={state['current_application.title.mode_show']}
+                                  <TextField
 
-                                      value={state['current_application.title.mode_show']}
-                          >
-                              <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
-                              <FormControlLabel labelPlacement="end" value="left" control={<Radio />} label="left" />
-                              <FormControlLabel labelPlacement="end" value="right" control={<Radio />} label="right" />
-                              {/*<FormControlLabel*/}
-                              {/*    value="disabled"*/}
-                              {/*    disabled*/}
-                              {/*    control={<Radio />}*/}
-                              {/*    label="other"/>*/}
-                          </RadioGroup>
-                      </FormControl>
+                                      required
+                                      variant={'standard'}
+                                      id="outlined-required"
+                                      label="Title text"
+                                      name={'current_application.title.text'}
+                                      value={state['current_application.title.text']}
+                                      onChange={(e)=>onChangeInput(e)}
+                                  />
 
-                  </FormGroup>
+                          <FormControl style={{marginTop:'4px'}}component="fieldset">
+                              <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
+                                          onChange={onChange_left_right}
+                                          // defaultValue={state['current_application.title.mode_position']}
+
+                                          value={state['current_application.title.mode_position']}
+                              >
+                                  <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
+                                  <FormControlLabel labelPlacement="end" value="left"
+                                        control={
+                                          <Radio
+                                              sx={{
+                                                  '&, &.Mui-checked': {
+                                                      color: (state['current_application.title.mode_show'])?'primary':'gray',
+                                                  },
+                                              }}
+                                          />}
+                                                    label="left"
+                                  />
+                                  <FormControlLabel labelPlacement="end" value="right"
+                                        control={
+                                            <Radio
+                                                sx={{
+                                                    '&, &.Mui-checked': {
+                                                        color: (state['current_application.title.mode_show'])?'primary':'gray',
+                                                    },
+                                                }}
+                                            />}
+
+                                                    label="right" />
+                                  {/*<FormControlLabel*/}
+                                  {/*    value="disabled"*/}
+                                  {/*    disabled*/}
+                                  {/*    control={<Radio />}*/}
+                                  {/*    label="other"/>*/}
+                              </RadioGroup>
+
+                          </FormControl>
+                      </fieldset>
+
+                    </FormGroup>
+
               </FormControl>
 
               </Box>
