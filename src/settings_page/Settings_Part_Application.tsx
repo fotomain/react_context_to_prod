@@ -100,11 +100,10 @@ const Settings_Part_Application: React.FC = () => {
           </Tabs>
 
           {/*id={'panel1'}*/}
-          <TabPanel {...{paddingtop:'25px', paddingleft:'25px'}}  value={tab_value} index={0}  >
+          <TabPanel value={tab_value} index={0}  >
+              <Box sx={{marginLeft:'24px' , marginTop:'24px' }} >
 
-              {/*{...{padding:10}}*/}
-
-              <FormControl component="fieldset" variant="standard">
+              <FormControl  component="fieldset" variant="standard">
                   <FormLabel component="legend">Title settings</FormLabel>
                   <FormGroup>
 
@@ -151,7 +150,7 @@ const Settings_Part_Application: React.FC = () => {
                   </FormGroup>
               </FormControl>
 
-
+              </Box>
 
           </TabPanel>
           <TabPanel value={tab_value} index={1} >
