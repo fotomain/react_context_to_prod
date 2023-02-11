@@ -20,7 +20,9 @@ initial_setings.current_user.first_name='not_defined'
 initial_setings.current_user.laxt_name='not_defined'
 
 initial_setings.current_application={}
+initial_setings.current_application.title={}
+initial_setings.current_application.title.text='111 All Best Posts' // image, color
+initial_setings.current_application.title.mode_show='left'
 initial_setings.current_application.background={}
-initial_setings.current_application.name='111 All Best Posts' // image, color
 initial_setings.current_application.background.background_type='default' // image, color
 initial_setings.current_application.background.background_color='green'

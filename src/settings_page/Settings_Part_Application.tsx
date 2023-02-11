@@ -7,10 +7,21 @@ import Tab from '@mui/material/Tab';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
-import {Box, TextField} from "@mui/material";
+import {
+    Box,
+    Divider,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    FormLabel, Radio,
+    RadioGroup,
+    Switch,
+    TextField
+} from "@mui/material";
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import {a11yProps, TabPanel} from "./MUITools";
 import {Context} from "../context_globals_logrec/context";
+import {useState} from "react";
 
 const Settings_Part_Application: React.FC = () => {
 
@@ -19,7 +30,8 @@ const Settings_Part_Application: React.FC = () => {
     const [tab_value, set_tab_value] = React.useState(0);
 
     const [state, setState] = React.useState({
-        'current_application.name':  global_props.current_application.name,
+        'current_application.title.text':  global_props.current_application.title.text,
+        'current_application.title.mode_show':  global_props.current_application.title.mode_show,
         // 'My Posts App',
     });
 
@@ -32,9 +44,9 @@ const Settings_Part_Application: React.FC = () => {
             [tname]: tvalue
         });
 
-        if('current_application.name'==tname){
+        if('current_application.title.text'==tname){
             const tdata = global_props.current_application
-            tdata.name = tvalue
+            tdata.title.text = tvalue
             global_dispatch({
                 type: 'SETTER_APPLICATION',
                 global_new_data:{current_application:tdata},
@@ -48,32 +60,98 @@ const Settings_Part_Application: React.FC = () => {
     };
 
 
+    function onChange_left_right(event:any) {
+        console.log("=== onChange_left_right")
+        let t_ev_type = (event.target.value).trim()
+        console.log(t_ev_type)
+        if(t_ev_type=="left"){
+            console.log('=== go left' )
+            setState({...state, ['current_application.title.mode_show']: 'left'})
+        }
+        else{
+            console.log('=== go right' )
+            setState({...state, ['current_application.title.mode_show']: 'right'})
+        }
+
+        const tdata = global_props.current_application
+        tdata.title.mode_show = t_ev_type
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
+
+
+
+    }
+
     return (
 <div>
       <Box>
 
-          <p>global_props.current_application.name {global_props.current_application.name}</p>
+          <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
+          <p>global_props.current_application.title.mode_show {global_props.current_application.title.mode_show}</p>
+          <p>state {JSON.stringify(state)}</p>
 
           <Tabs value={tab_value} onChange={onChangeTab} aria-label="icon label tabs example">
-              <Tab icon={<FavoriteIcon />} label="NAME"  {...a11yProps(0)} />
-              <Tab icon={<WallpaperIcon />} label="BACKGROUND"  {...a11yProps(1)} />
-              <Tab icon={<PersonPinIcon />} label="ABOUT"  {...a11yProps(2)}  />
+              <Tab icon={<FavoriteIcon />} label="Title"  {...a11yProps(0)} />
+              <Tab icon={<WallpaperIcon />} label="Bacgground"  {...a11yProps(1)} />
+              <Tab icon={<PersonPinIcon />} label="About"  {...a11yProps(2)}  />
           </Tabs>
 
           {/*id={'panel1'}*/}
-          <TabPanel {...{paddingTop:'15px', paddingLeft:'5px'}}  value={tab_value} index={0}  >
+          <TabPanel {...{paddingtop:'25px', paddingleft:'25px'}}  value={tab_value} index={0}  >
 
               {/*{...{padding:10}}*/}
-              <TextField
 
-                  required
-                  id="outlined-required"
-                  label="Application name"
-                  // defaultValue="My Posts App"
-                  name={'current_application.name'}
-                  value={state['current_application.name']}
-                  onChange={(e)=>onChangeInput(e)}
-              />
+              <FormControl component="fieldset" variant="standard">
+                  <FormLabel component="legend">Title settings</FormLabel>
+                  <FormGroup>
+
+                      <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
+
+                      <FormControlLabel
+                          control={
+                              // <Switch checked={state.mode_show} onChange={handleChange} name="slides_mirrored" />
+                              <Switch  />
+                          }
+                          label="Show"
+                      />
+
+                      <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
+
+                              <TextField
+                                  required
+                                  variant={'standard'}
+                                  id="outlined-required"
+                                  label="Title text"
+                                  name={'current_application.title.text'}
+                                  value={state['current_application.title.text']}
+                                  onChange={(e)=>onChangeInput(e)}
+                              />
+
+                      <FormControl style={{marginTop:'4px'}}component="fieldset">
+                          <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
+                                      onChange={onChange_left_right}
+                                      // defaultValue={state['current_application.title.mode_show']}
+
+                                      value={state['current_application.title.mode_show']}
+                          >
+                              <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
+                              <FormControlLabel labelPlacement="end" value="left" control={<Radio />} label="left" />
+                              <FormControlLabel labelPlacement="end" value="right" control={<Radio />} label="right" />
+                              {/*<FormControlLabel*/}
+                              {/*    value="disabled"*/}
+                              {/*    disabled*/}
+                              {/*    control={<Radio />}*/}
+                              {/*    label="other"/>*/}
+                          </RadioGroup>
+                      </FormControl>
+
+                  </FormGroup>
+              </FormControl>
+
+
 
           </TabPanel>
           <TabPanel value={tab_value} index={1} >
