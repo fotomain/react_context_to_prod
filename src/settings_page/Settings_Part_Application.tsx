@@ -152,7 +152,7 @@ const Settings_Part_Application: React.FC = () => {
                                           onChange={onChange_left_right}
                                           // defaultValue={state['current_application.title.mode_position']}
 
-                                          value={state['current_application.title.mode_position']}
+                                      value={state['current_application.title.mode_position']}
                               >
                                   <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
                                   <FormControlLabel labelPlacement="end" value="left"
