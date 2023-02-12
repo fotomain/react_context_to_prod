@@ -22,6 +22,7 @@ import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import {a11yProps, TabPanel} from "./MUITools";
 import {Context} from "../context_globals_logrec/context";
 import {useState} from "react";
+import Settings_Part_Background from "./Settings_Part_Background";
 
 const Settings_Part_Application: React.FC = () => {
 
@@ -36,6 +37,7 @@ const Settings_Part_Application: React.FC = () => {
         // is_disabled:true,
         // 'My Posts App',
     });
+
 
 
     const onChangeInput = (event: any) => {
@@ -195,7 +197,12 @@ const Settings_Part_Application: React.FC = () => {
 
           </TabPanel>
           <TabPanel value={tab_value} index={1} >
-              Item Two
+
+              <Box  sx={{marginLeft:'24px' , marginTop:'24px' }} >
+                  Item Two 222
+                  <Settings_Part_Background/>
+              </Box>
+
           </TabPanel>
           <TabPanel value={tab_value} index={2}  >
               Item Three

@@ -22,6 +22,7 @@ import Box from '@mui/material/Box';
 import Settings_Part_Application from "./Settings_Part_Application";
 import {a11yProps, TabPanel} from "./MUITools";
 import { styled } from '@mui/material/styles';
+import Settings_Part_Background from "./Settings_Part_Background";
 
 const Settings: React.FC = () => {
 
@@ -63,6 +64,7 @@ const Settings: React.FC = () => {
             backgroundColor: 'green',
         },
     });
+
 
     return (
 
@@ -120,7 +122,8 @@ const Settings: React.FC = () => {
                     </Box>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Item Two
+                    <Box sx={{paddingLeft: '15px',}}>
+                    </Box>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     Item Three
