@@ -69,6 +69,10 @@ const Div1: React.FC = () => {
                     flexDirection:'column',
                     justifyContent:'space-between',
                     alignItems:'top',
+
+                    paddingLeft:'5%',
+                    paddingRight:'5%',
+
                     }}
             >
                 <AppWorkPage/>

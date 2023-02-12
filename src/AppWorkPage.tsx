@@ -70,18 +70,13 @@ const style1 = { "--background": 'url(' + require('./images_app/bkg3.jpg') + ')'
 
 const AppWorkPage: React.FC = () => {
 
-
-
     return (
-
-
-                <IonContent id={'toot'}
-
-                >
-
+                <IonContent id={'comp_settings'}>
 
                     <Globals_Provider>
-                        <div className="App">
+                        <div className="App"
+
+                        >
                             <LogrecForm/>
                             <LogrecList/>
                             <div className="rules">
@@ -91,6 +86,7 @@ const AppWorkPage: React.FC = () => {
                             <Settings />
                         </div>
                     </Globals_Provider>
+
 
 
                     {/*<LogrecProvider>*/}
