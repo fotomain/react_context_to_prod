@@ -22,7 +22,7 @@ export interface TGloabal_context {
 // }
 
 export interface TGloabal_props {
-    db:any;
+    db?:any;
     logrecs: Array<T1_logrec>;
     current_user: any; //C1_current_user;
     current_application: any;

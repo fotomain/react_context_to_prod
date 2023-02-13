@@ -49,7 +49,7 @@ const Settings_Part_Background: React.FC = () => {
             const file_data = event.target.result
             console.log("=== base64 ",file_data)
 
-            if(fileReader.result) {
+            if(file_data) {
                 setState({...state, ['image_base64']: file_data})
 
                 const image_url = file_data;
@@ -61,7 +61,7 @@ const Settings_Part_Background: React.FC = () => {
                 global_props.db.set("file1",file_data);
                 // codesandbox.io file to localStorage
                 const tdata = global_props.current_application
-                tdata.background.background_data = 'uploaded'
+                tdata.background.background_data = file_data
                 global_dispatch({
                     type: 'SETTER_APPLICATION',
                     global_new_data:{current_application:tdata, db: global_props.db},

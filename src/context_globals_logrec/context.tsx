@@ -22,16 +22,16 @@ export const Context = React.createContext({} as TGloabal_context);
 
 interface IProps {
     children?: React.ReactChild;
-    db?: any;
-    setDb?: any;
+
 }
 
 export function Globals_Provider(props: IProps) {
 
-    const setDb = props.setDb
+    const [db, setDb] = useState<Database | null>(null);
+    console.log('=== init db ')
 
     const [global_props, global_dispatch] = React.useReducer(userReducer, {
-        db:props.db,
+        db:db,
         logrecs:initial_logrecs,
         // current_user:initial_user
         current_user:initial_setings.current_user,
@@ -49,8 +49,6 @@ export function Globals_Provider(props: IProps) {
         }
 
         initDb();
-
-
 
     }, []);
 

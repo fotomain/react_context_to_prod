@@ -12,12 +12,11 @@ const root = createRoot(container!);
 
 
 const co1 = ()=>{
-    const [db, setDb] = useState<Database | null>(null);
 
     return(
     <React.StrictMode>
 
-        <Globals_Provider db={db} setDb={setDb}>
+        <Globals_Provider>
             <App/>
         </Globals_Provider>
 

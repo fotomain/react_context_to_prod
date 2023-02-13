@@ -16,9 +16,10 @@ import {IonApp, IonContent, IonRouterOutlet, setupIonicReact} from '@ionic/react
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import ViewMessage from './pages/ViewMessage';
-
+// import { Player } from "video-react";
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
+
 
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
@@ -53,20 +54,6 @@ setupIonicReact();
 const App: React.FC = () => {
 
     const { global_props,global_dispatch } = React.useContext(Context);
-    const [ file_data, set_file_data ] = React.useState('');
-
-    const runGet = async () => {
-        console.log('=== global_props',global_props)
-        console.log('=== global_props.db',global_props.db)
-        if(global_props.db) {
-            const val = await global_props.db.get('file1').then((data:any)=>{
-
-                console.log('=== Got value', val);
-                set_file_data(val)
-
-            });
-        }
-    }
 
     var string_to_data_background:any =  ''
     string_to_data_background =  require('./images_app/bkg3.jpg')
@@ -82,12 +69,15 @@ const App: React.FC = () => {
         // string_to_data_background='"'+global_props.current_application.background.background_data+'"'
         // string_to_data_background = localStorage.getItem("file1");
 
-
     }
     console.log("=== string_to_data_background",string_to_data_background)
     useEffect(() => {
         return () => {
-            runGet()
+            // runGet
+            const el = document.getElementById('id1')
+            if(el){
+                // el.video.src=global_props.current_application.background.background_data
+            }
         };
     }, [global_props.current_application.background.background_data]);
 
@@ -115,34 +105,35 @@ const App: React.FC = () => {
 
                     }}
             >
-            {/*{(!global_props.current_application.background.background_data)?'':*/}
-            {(!file_data)?'Loading video...':
-                <video
+
+            <input type="file" id="archivo" name="archivo" onChange={(event:any)=>{
+                let file = event.target.files[0];
+
+                // let blobURL = URL.createObjectURL(file);
+                // console.log("=== blobURL",blobURL)
+
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function (event:any) {
+                    const file_data = event.target.result
+                    console.log("=== base64 ",file_data)
+
+
+                    const el = document.getElementById("#video1") as HTMLVideoElement
+                    if (el) el.src = file_data;
+                }
+
+
+            }} />
+
+            <video  id={'#video1'}
                     autoPlay
-                    loop
-                    muted
+                    width="320" height="240" controls
+            >
+                Your browser does not support the video tag.
+            </video>
 
-                    controls
-                    style={{ zIndex:1,
-                        // height:'100%',
-                        height:'200px',
-                        // width:'100%',
-                        width:'200px',
 
-                        objectFit: 'cover',
-                        position: 'absolute',
-                        top: '0',
-                        left: '0',
-
-                        // filter: `blur(${blur}px)`, WebkitFilter: `blur(${blur}px)`
-                    }}
-
-                >
-                    <source type={'video/mp4'}
-                            src={file_data}
-                    />
-                </video>
-            }
             <AppWorkPage/>
         </IonApp>
 
