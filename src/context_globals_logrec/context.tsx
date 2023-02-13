@@ -27,30 +27,14 @@ interface IProps {
 
 export function Globals_Provider(props: IProps) {
 
-    const [db, setDb] = useState<Database | null>(null);
-    console.log('=== init db ')
 
     const [global_props, global_dispatch] = React.useReducer(userReducer, {
-        db:db,
+
         logrecs:initial_logrecs,
         // current_user:initial_user
         current_user:initial_setings.current_user,
         current_application:initial_setings.current_application
     });
-
-        useEffect(() => {
-        async function initDb() {
-            const store = new Storage();
-
-            const db = await store.create();
-
-            setDb(db);
-            global_dispatch({type:'DB_LOCAL_SETDB','global_new_data':db})
-        }
-
-        initDb();
-
-    }, []);
 
 
     const value = { global_props, global_dispatch };

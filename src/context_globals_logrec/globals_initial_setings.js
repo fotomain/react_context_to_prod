@@ -1,8 +1,6 @@
 
 export var initial_setings = {}
 
-initial_setings.db=null
-
 initial_setings.system={}
 initial_setings.system.device={}
 initial_setings.system.api={}

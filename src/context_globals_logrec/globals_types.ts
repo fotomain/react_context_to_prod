@@ -2,7 +2,7 @@
 export interface ILogrecsActions {
     type:     "SETTER_USER"
             | "SETTER_APPLICATION"
-            | "DB_LOCAL_SETDB"
+
             | "TOGGLE_TODO"
             | "DELETE_TODO"
             | "ADD_TODO";
@@ -22,7 +22,7 @@ export interface TGloabal_context {
 // }
 
 export interface TGloabal_props {
-    db?:any;
+
     logrecs: Array<T1_logrec>;
     current_user: any; //C1_current_user;
     current_application: any;

@@ -7,30 +7,14 @@ export default function logrecsReducer(
     activity: ILogrecsActions
 ): TGloabal_props {
     switch (activity.type) {
-        case "DB_LOCAL_SETDB": {
-            console.log("DB_LOCAL_SETDB")
-            console.log(activity.global_new_data)
-            return {
-                ...now_props,
-                db: activity.global_new_data
-            };
-        }
+
         case "SETTER_APPLICATION": {
             console.log("SETTER_APPLICATION")
             console.log(activity.global_new_data)
-            if(activity.global_new_data.db){
                 return {
                     ...now_props,
                     current_application: activity.global_new_data.current_application,
-                    db:activity.global_new_data.db
                 };
-            }
-            else {
-                return {
-                    ...now_props,
-                    current_application: activity.global_new_data.current_application
-                };
-            }
         }
         case "SETTER_USER": {
             console.log("SETTER_USER")

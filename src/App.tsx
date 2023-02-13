@@ -66,8 +66,8 @@ const App: React.FC = () => {
     {
 
         console.log("=== 222 global_props",global_props)
-        // string_to_data_background='"'+global_props.current_application.background.background_data+'"'
-        // string_to_data_background = localStorage.getItem("file1");
+        string_to_data_background='"'+global_props.current_application.background.background_data+'"'
+
 
     }
     console.log("=== string_to_data_background",string_to_data_background)
@@ -105,34 +105,6 @@ const App: React.FC = () => {
 
                     }}
             >
-
-            <input type="file" id="archivo" name="archivo" onChange={(event:any)=>{
-                let file = event.target.files[0];
-
-                // let blobURL = URL.createObjectURL(file);
-                // console.log("=== blobURL",blobURL)
-
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function (event:any) {
-                    const file_data = event.target.result
-                    console.log("=== base64 ",file_data)
-
-
-                    const el = document.getElementById("#video1") as HTMLVideoElement
-                    if (el) el.src = file_data;
-                }
-
-
-            }} />
-
-            <video  id={'#video1'}
-                    autoPlay
-                    width="320" height="240" controls
-            >
-                Your browser does not support the video tag.
-            </video>
-
 
             <AppWorkPage/>
         </IonApp>

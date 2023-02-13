@@ -52,21 +52,17 @@ const Settings_Part_Background: React.FC = () => {
             if(file_data) {
                 setState({...state, ['image_base64']: file_data})
 
-                const image_url = file_data;
                 let image = document.createElement('img');
-                image.src = image_url;
+                image.src = file_data;
 
-
-                // localStorage.setItem("file1",file_data);
-                global_props.db.set("file1",file_data);
-                // codesandbox.io file to localStorage
                 const tdata = global_props.current_application
+                tdata.background.background_type = "image"
                 tdata.background.background_data = file_data
+                console.log("=== tdata",tdata)
                 global_dispatch({
                     type: 'SETTER_APPLICATION',
-                    global_new_data:{current_application:tdata, db: global_props.db},
+                    global_new_data:{current_application:tdata},
                 })
-
 
 
             }
@@ -108,6 +104,7 @@ const Settings_Part_Background: React.FC = () => {
     return (
 
         <Box>
+        <Box>
 
             {/*codesandbox image from base65*/}
 
@@ -115,13 +112,45 @@ const Settings_Part_Background: React.FC = () => {
 
             {(!state.image_base64)?'':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
 
-    {/*        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA*/}
-    {/*AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO*/}
-    {/*    9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />*/}
 
+        </Box>
+
+        <Box>
+
+            <input type="file" id="archivo" name="archivo" onChange={(event:any)=>{
+                let file = event.target.files[0];
+
+                // let blobURL = URL.createObjectURL(file);
+                // console.log("=== blobURL",blobURL)
+
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function (event:any) {
+                    const file_data = event.target.result
+                    console.log("=== base64 ",file_data)
+
+
+                    const el = document.getElementById("#video1") as HTMLVideoElement
+                    if (el) el.src = file_data;
+                }
+
+
+            }} />
+
+
+            <video  id={'#video1'}
+                    autoPlay
+                    width="320" height="240" controls
+            >
+                Your browser does not support the video tag.
+            </video>
+
+        </Box>
         </Box>
 
   );
 };
 
 export default Settings_Part_Background;
+
+
