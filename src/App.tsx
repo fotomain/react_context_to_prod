@@ -89,7 +89,7 @@ const App: React.FC = () => {
                 style={{
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover", //!!! NO VISUAL DISTORTINOS
-                    // backgroundSize:'100% 100%',
+                    // backgroundSize:'100%  100%',
                     backgroundPosition: "center",
                     // no-repeat center / cover
 
