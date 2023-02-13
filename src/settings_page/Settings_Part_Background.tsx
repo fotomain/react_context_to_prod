@@ -1,11 +1,13 @@
 
-import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+
+
 
 import * as React from 'react';
 import {Context} from "../context_globals_logrec/context";
 import {Box} from "@mui/material";
 
-
+import { Database, Storage } from '@ionic/storage';
+import {useEffect, useState} from "react";
 
 const Settings_Part_Background: React.FC = () => {
 
@@ -44,14 +46,28 @@ const Settings_Part_Background: React.FC = () => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
         fileReader.onload = function (event:any) {
-            console.log("=== base64 ",event.target.result)
+            const file_data = event.target.result
+            console.log("=== base64 ",file_data)
 
             if(fileReader.result) {
-                setState({...state, ['image_base64']: event.target.result})
+                setState({...state, ['image_base64']: file_data})
 
-                const image_url = event.target.result;
+                const image_url = file_data;
                 let image = document.createElement('img');
                 image.src = image_url;
+
+
+                // localStorage.setItem("file1",file_data);
+                global_props.db.set("file1",file_data);
+                // codesandbox.io file to localStorage
+                const tdata = global_props.current_application
+                tdata.background.background_data = 'uploaded'
+                global_dispatch({
+                    type: 'SETTER_APPLICATION',
+                    global_new_data:{current_application:tdata, db: global_props.db},
+                })
+
+
 
             }
         };
@@ -87,6 +103,7 @@ const Settings_Part_Background: React.FC = () => {
                 return "formato de archivo no reconocido";
         }
     };
+
 
     return (
 

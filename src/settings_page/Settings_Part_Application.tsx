@@ -94,7 +94,6 @@ const Settings_Part_Application: React.FC = () => {
 
           <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
           <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
-          <p>state {JSON.stringify(state)}</p>
 
           <Tabs value={tab_value} onChange={onChangeTab} aria-label="icon label tabs example">
               <Tab icon={<FavoriteIcon />} label="Title"  {...a11yProps(0)} />
@@ -207,6 +206,8 @@ const Settings_Part_Application: React.FC = () => {
           <TabPanel value={tab_value} index={2}  >
               Item Three
           </TabPanel>
+
+
 
       </Box>
 </div>

@@ -16,6 +16,7 @@ call npm install @mui/styles
 
 call npm install styled-components@latest
 call npm install --save-dev @types/styled-components@latest
+call npm install @ionic/storage
 
 @REM call npm i @capacitor/device
 @REM call npm i react-virtuoso

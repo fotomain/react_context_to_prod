@@ -9,7 +9,7 @@
 
 // npm install --save-dev @types/styled-components-react-native
 
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import {IonApp, IonContent, IonRouterOutlet, setupIonicReact} from '@ionic/react';
@@ -39,7 +39,7 @@ import Test_Globals from "./z_context_globals/Test_Globals";
 
 //start_globals_from_logrec
 
-import { Globals_Provider } from "./context_globals_logrec/context";
+import {Context, Globals_Provider} from "./context_globals_logrec/context";
 import LogrecList from "./context_globals_logrec/LogrecList";
 import LogrecForm from "./context_globals_logrec/LogrecForm";
 
@@ -50,7 +50,47 @@ import AppWorkPage from "./AppWorkPage";
 setupIonicReact();
 
 
-const Div1: React.FC = () => {
+const App: React.FC = () => {
+
+    const { global_props,global_dispatch } = React.useContext(Context);
+    const [ file_data, set_file_data ] = React.useState('');
+
+    const runGet = async () => {
+        console.log('=== global_props',global_props)
+        console.log('=== global_props.db',global_props.db)
+        if(global_props.db) {
+            const val = await global_props.db.get('file1').then((data:any)=>{
+
+                console.log('=== Got value', val);
+                set_file_data(val)
+
+            });
+        }
+    }
+
+    var string_to_data_background:any =  ''
+    string_to_data_background =  require('./images_app/bkg3.jpg')
+    console.log("=== 111 global_props",global_props)
+    if(
+        "image"==global_props.current_application.background.background_type
+        &&
+        ''!=global_props.current_application.background.background_data
+    )
+    {
+
+        console.log("=== 222 global_props",global_props)
+        // string_to_data_background='"'+global_props.current_application.background.background_data+'"'
+        // string_to_data_background = localStorage.getItem("file1");
+
+
+    }
+    console.log("=== string_to_data_background",string_to_data_background)
+    useEffect(() => {
+        return () => {
+            runGet()
+        };
+    }, [global_props.current_application.background.background_data]);
+
 
     return (
 
@@ -63,7 +103,7 @@ const Div1: React.FC = () => {
                     backgroundPosition: "center",
                     // no-repeat center / cover
 
-                    backgroundImage: 'url(' + require('./images_app/bkg3.jpg') + ')',
+                    backgroundImage: 'url(' + string_to_data_background + ')' ,
 
                     display:'flex',
                     flexDirection:'column',
@@ -75,10 +115,38 @@ const Div1: React.FC = () => {
 
                     }}
             >
-                <AppWorkPage/>
-            </IonApp>
+            {/*{(!global_props.current_application.background.background_data)?'':*/}
+            {(!file_data)?'Loading video...':
+                <video
+                    autoPlay
+                    loop
+                    muted
+
+                    controls
+                    style={{ zIndex:1,
+                        // height:'100%',
+                        height:'200px',
+                        // width:'100%',
+                        width:'200px',
+
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+
+                        // filter: `blur(${blur}px)`, WebkitFilter: `blur(${blur}px)`
+                    }}
+
+                >
+                    <source type={'video/mp4'}
+                            src={file_data}
+                    />
+                </video>
+            }
+            <AppWorkPage/>
+        </IonApp>
 
     )
 };
 
-export default Div1;
+export default App;

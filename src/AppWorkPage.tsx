@@ -73,7 +73,7 @@ const AppWorkPage: React.FC = () => {
     return (
                 <IonContent id={'comp_settings'}>
 
-                    <Globals_Provider>
+                    {/*<Globals_Provider>*/}
                         <div className="App"
 
                         >
@@ -85,7 +85,7 @@ const AppWorkPage: React.FC = () => {
                             </div>
                             <Settings />
                         </div>
-                    </Globals_Provider>
+                    {/*</Globals_Provider>*/}
 
 
 

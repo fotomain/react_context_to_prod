@@ -1,18 +1,33 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { createRoot } from 'react-dom/client';
 import AppWorkPage from './AppWorkPage';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import App from "./App";
+import {Globals_Provider} from "./context_globals_logrec/context";
+import {Database, Storage} from "@ionic/storage";
 
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
+
+const co1 = ()=>{
+    const [db, setDb] = useState<Database | null>(null);
+
+    return(
+    <React.StrictMode>
+
+        <Globals_Provider db={db} setDb={setDb}>
+            <App/>
+        </Globals_Provider>
+
+    </React.StrictMode>
+)
+}
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+    co1()
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

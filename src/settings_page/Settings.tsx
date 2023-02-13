@@ -1,5 +1,5 @@
 
-//=== DOC DIFF
+//=== DOC DIFF !!!!!!!!!!!!!!!!!!!!!!!!!!
 // <div id={'main'}
 //
 //      flexDirection:'column', ============== flexDirection:'row',
@@ -23,9 +23,12 @@ import Settings_Part_Application from "./Settings_Part_Application";
 import {a11yProps, TabPanel} from "./MUITools";
 import { styled } from '@mui/material/styles';
 import Settings_Part_Background from "./Settings_Part_Background";
+import {globals_props_Reducer} from "../z_context_globals/globals_reducers";
+import {Context} from "../context_globals_logrec/context";
 
 const Settings: React.FC = () => {
 
+    const { global_props, global_dispatch } = React.useContext(Context);
 
     const [value, setValue] = React.useState(0);
 
@@ -141,6 +144,8 @@ const Settings: React.FC = () => {
                     Item Seven
                 </TabPanel>
             </Box>
+
+            <p>global_props = {JSON.stringify(global_props)}</p>
 
         </div>
 
