@@ -144,16 +144,16 @@ const Settings_Part_Background: React.FC = () => {
 
                     console.log("=== src = file_data ")
 
-                    // const tdata = global_props.current_application
-                    // tdata.background.background_media_type = "video"
-                    // tdata.background.background_data_video_value_source_type = 'file'
-                    // tdata.background.background_data_video_value = file_data
-                    // console.log("=== tdata",tdata)
-                    // console.log("=== SETTER_APPLICATION start ",tdata)
-                    // global_dispatch({
-                    //     type: 'SETTER_APPLICATION',
-                    //     global_new_data:{current_application:tdata},
-                    // })
+                    const tdata = global_props.current_application
+                    tdata.background.background_media_type = "video"
+                    tdata.background.background_data_video_value_source_type = 'file'
+                    tdata.background.background_data_video_value = file_data
+                    console.log("=== tdata",tdata)
+                    console.log("=== SETTER_APPLICATION start ",tdata)
+                    global_dispatch({
+                        type: 'SETTER_APPLICATION',
+                        global_new_data:{current_application:tdata},
+                    })
 
 
                 }
@@ -167,7 +167,9 @@ const Settings_Part_Background: React.FC = () => {
 
                     src={file_data_video}
                     autoPlay
-                    width="320" height="240" controls
+                    loop
+
+                    width="150" height="150" controls
             >
                 Your browser does not support the video tag.
             </video>

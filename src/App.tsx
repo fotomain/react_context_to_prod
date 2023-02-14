@@ -67,7 +67,7 @@ const App: React.FC = () => {
 
             data_background_video=global_props.current_application.background.background_data_video_value
             // data_background_video='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
-
+            console.log("=== data_background_video START",Date)
 
         }
         console.log("=== data_background_picture",data_background_picture)
@@ -98,6 +98,7 @@ const App: React.FC = () => {
         <IonApp className={'div_full_screen'}
 
                 style={{
+                    zIndex:5,
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover", //!!! NO VISUAL DISTORTINOS
                     // backgroundSize:'100%  100%',
@@ -119,15 +120,26 @@ const App: React.FC = () => {
 
             {/*https://artlist.io/stock-footage/clip/pyramids-egypt-ancient-giza/617748*/}
 
-            {/*{(!data_background_video)?'Loading video...':*/}
-            {/*<video  id={'#video0'}*/}
-            {/*        autoPlay*/}
-            {/*        src={data_background_video}*/}
-            {/*        width="320" height="240" controls*/}
-            {/*>*/}
-            {/*    Your browser does not support the video tag.*/}
-            {/*</video>*/}
-            {/*}*/}
+            {(!data_background_video)?'no video...':
+            <video  id={'#video0'}
+                    style={{
+                        zIndex:10, opacity:'0.3',
+                        objectFit: 'cover',
+                        position: 'absolute',
+                        top: '0',
+                        left: '0',
+                        height:'100%',
+                        width:'100%',
+                    }}
+                    autoPlay
+                    loop
+                    src={data_background_video}
+                    // width="320" height="240" controls
+                    // width="100%" height="100%" controls
+            >
+                Your browser does not support the video tag.
+            </video>
+            }
 
 
             <AppWorkPage/>
