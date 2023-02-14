@@ -13,6 +13,10 @@ const Settings_Part_Background: React.FC = () => {
 
     const { global_props, global_dispatch } = React.useContext(Context);
 
+    const [file2_loading_video, set_file2_loading_video] = useState(false);
+    const [file_data_video, set_file_data_video] = useState('');
+
+
     const [state, setState] = React.useState({
         header1:'',
         file1:'',
@@ -56,8 +60,9 @@ const Settings_Part_Background: React.FC = () => {
                 image.src = file_data;
 
                 const tdata = global_props.current_application
-                tdata.background.background_type = "image"
-                tdata.background.background_data_image = file_data
+                tdata.background.background_media_type = "image"
+                tdata.background.background_data_image_value_source_type = 'file'
+                tdata.background.background_data_image_value = file_data
                 console.log("=== tdata",tdata)
                 global_dispatch({
                     type: 'SETTER_APPLICATION',
@@ -123,6 +128,7 @@ const Settings_Part_Background: React.FC = () => {
                 // let blobURL = URL.createObjectURL(file);
                 // console.log("=== blobURL",blobURL)
 
+                set_file2_loading_video(true)
                 const fileReader = new FileReader();
                 fileReader.readAsDataURL(file);
                 fileReader.onload = function (event:any) {
@@ -130,20 +136,42 @@ const Settings_Part_Background: React.FC = () => {
                     console.log("=== base64 ",file_data)
 
 
+
                     const el = document.getElementById("#video1") as HTMLVideoElement
+                    // set_file2_loading_video(false)
+                    // set_file_data_video(file_data)
                     if (el) el.src = file_data;
+
+                    console.log("=== src = file_data ")
+
+                    // const tdata = global_props.current_application
+                    // tdata.background.background_media_type = "video"
+                    // tdata.background.background_data_video_value_source_type = 'file'
+                    // tdata.background.background_data_video_value = file_data
+                    // console.log("=== tdata",tdata)
+                    // console.log("=== SETTER_APPLICATION start ",tdata)
+                    // global_dispatch({
+                    //     type: 'SETTER_APPLICATION',
+                    //     global_new_data:{current_application:tdata},
+                    // })
+
+
                 }
 
 
             }} />
 
 
+            {/*{(0==file_data_video.length)?'file2_loading_video':*/}
             <video  id={'#video1'}
+
+                    // src={file_data_video}
                     autoPlay
                     width="320" height="240" controls
             >
                 Your browser does not support the video tag.
             </video>
+            {/*}*/}
 
         </Box>
         </Box>

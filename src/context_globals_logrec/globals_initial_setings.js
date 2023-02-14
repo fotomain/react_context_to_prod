@@ -26,7 +26,8 @@ initial_setings.current_application.title.mode_show=true
 initial_setings.current_application.title.mode_position='left'
 
 initial_setings.current_application.background={}
-initial_setings.current_application.background.background_type='image' // default=image, color, video
-initial_setings.current_application.background.background_data_source_type='' //url, file
-initial_setings.current_application.background.background_data_image=''
-initial_setings.current_application.background.background_data_video=''
+initial_setings.current_application.background.background_media_type='image' // default=image, color, video
+initial_setings.current_application.background.background_data_image_value_source_type='' //url, file
+initial_setings.current_application.background.background_data_image_value=''
+initial_setings.current_application.background.background_data_video_source_type='' //url, file
+initial_setings.current_application.background.background_data_video_value=''

@@ -55,31 +55,42 @@ const App: React.FC = () => {
 
     const { global_props,global_dispatch } = React.useContext(Context);
 
-    var string_to_data_background:any =  ''
-    string_to_data_background =  require('./images_app/bkg3.jpg')
-    console.log("=== 111 global_props",global_props)
-    if(
-        "image"==global_props.current_application.background.background_type
-        &&
-        ''!=global_props.current_application.background.background_data_image
-    )
-    {
+    var data_background_video:any =  ''
+        console.log("=== VVV global_props",global_props)
+        if(
+            "video"==global_props.current_application.background.background_media_type
+            &&
+            ''!=global_props.current_application.background.background_data_video_value
+            // && file or url
+        )
+        {
 
-        console.log("=== 222 global_props",global_props)
-        string_to_data_background='"'+global_props.current_application.background.background_data_image+'"'
+            data_background_video=global_props.current_application.background.background_data_video_value
+            // data_background_video='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
 
 
-    }
-    console.log("=== string_to_data_background",string_to_data_background)
-    useEffect(() => {
-        return () => {
-            // runGet
-            const el = document.getElementById('id1')
-            if(el){
-                // el.video.src=global_props.current_application.background.background_data_image
-            }
-        };
-    }, [global_props.current_application.background.background_data_image]);
+        }
+        console.log("=== data_background_picture",data_background_picture)
+
+    var data_background_picture:any =  ''
+    data_background_picture =  require('./images_app/bkg3.jpg')
+        console.log("=== 111 global_props",global_props)
+        if(
+            "image"==global_props.current_application.background.background_media_type
+            &&
+            ''!=global_props.current_application.background.background_data_image_value
+            // && file or url
+        )
+        {
+
+            console.log("=== 222 global_props",global_props)
+            data_background_picture=global_props.current_application.background.background_data_image_value
+            // data_background_picture='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
+
+
+        }
+        console.log("=== data_background_picture",data_background_picture)
+
 
 
     return (
@@ -93,7 +104,7 @@ const App: React.FC = () => {
                     backgroundPosition: "center",
                     // no-repeat center / cover
 
-                    backgroundImage: 'url(' + string_to_data_background + ')' ,
+                    backgroundImage: 'url(' + data_background_picture + ')' ,
 
                     display:'flex',
                     flexDirection:'column',
@@ -105,6 +116,19 @@ const App: React.FC = () => {
 
                     }}
             >
+
+            {/*https://artlist.io/stock-footage/clip/pyramids-egypt-ancient-giza/617748*/}
+
+            {/*{(!data_background_video)?'Loading video...':*/}
+            {/*<video  id={'#video0'}*/}
+            {/*        autoPlay*/}
+            {/*        src={data_background_video}*/}
+            {/*        width="320" height="240" controls*/}
+            {/*>*/}
+            {/*    Your browser does not support the video tag.*/}
+            {/*</video>*/}
+            {/*}*/}
+
 
             <AppWorkPage/>
         </IonApp>

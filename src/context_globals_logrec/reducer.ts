@@ -9,7 +9,7 @@ export default function logrecsReducer(
     switch (activity.type) {
 
         case "SETTER_APPLICATION": {
-            console.log("SETTER_APPLICATION")
+            console.log("=== SETTER_APPLICATION reducer start")
             console.log(activity.global_new_data)
                 return {
                     ...now_props,
