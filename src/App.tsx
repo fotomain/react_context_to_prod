@@ -61,12 +61,12 @@ const App: React.FC = () => {
     if(
         "image"==global_props.current_application.background.background_type
         &&
-        ''!=global_props.current_application.background.background_data
+        ''!=global_props.current_application.background.background_data_image
     )
     {
 
         console.log("=== 222 global_props",global_props)
-        string_to_data_background='"'+global_props.current_application.background.background_data+'"'
+        string_to_data_background='"'+global_props.current_application.background.background_data_image+'"'
 
 
     }
@@ -76,10 +76,10 @@ const App: React.FC = () => {
             // runGet
             const el = document.getElementById('id1')
             if(el){
-                // el.video.src=global_props.current_application.background.background_data
+                // el.video.src=global_props.current_application.background.background_data_image
             }
         };
-    }, [global_props.current_application.background.background_data]);
+    }, [global_props.current_application.background.background_data_image]);
 
 
     return (
@@ -113,3 +113,5 @@ const App: React.FC = () => {
 };
 
 export default App;
+
+

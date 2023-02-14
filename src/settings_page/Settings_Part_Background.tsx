@@ -57,7 +57,7 @@ const Settings_Part_Background: React.FC = () => {
 
                 const tdata = global_props.current_application
                 tdata.background.background_type = "image"
-                tdata.background.background_data = file_data
+                tdata.background.background_data_image = file_data
                 console.log("=== tdata",tdata)
                 global_dispatch({
                     type: 'SETTER_APPLICATION',

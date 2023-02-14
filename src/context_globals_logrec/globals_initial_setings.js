@@ -27,4 +27,6 @@ initial_setings.current_application.title.mode_position='left'
 
 initial_setings.current_application.background={}
 initial_setings.current_application.background.background_type='image' // default=image, color, video
-initial_setings.current_application.background.background_data=''
+initial_setings.current_application.background.background_data_source_type='' //url, file
+initial_setings.current_application.background.background_data_image=''
+initial_setings.current_application.background.background_data_video=''
