@@ -120,6 +120,7 @@ const App: React.FC = () => {
 
             {/*https://artlist.io/stock-footage/clip/pyramids-egypt-ancient-giza/617748*/}
 
+            {/*=== !!! state IMPORTANT do it for static URL also*/}
             {(!data_background_video)?'no video...':
             <video  id={'#video0'}
                     style={{
@@ -131,12 +132,16 @@ const App: React.FC = () => {
                         height:'100%',
                         width:'100%',
                     }}
-                    autoPlay
+
+                    autoPlay={true}
+
                     loop
-                    src={data_background_video}
+                    src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'}
+                    // src={data_background_video}
                     // width="320" height="240" controls
                     // width="100%" height="100%" controls
             >
+                <source src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
             }
