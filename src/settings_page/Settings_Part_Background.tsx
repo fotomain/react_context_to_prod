@@ -279,7 +279,7 @@ const Settings_Part_Background: React.FC = () => {
 
                 </Box> {/*VVVVVVVVVVVVV*/}
 
-                <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
+                <Box sx={{ display:'flex', flexDirection: 'row',  }}>
                     <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
                         {(state.image_base64.length==0)?'no image selected':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
                     </Box>
