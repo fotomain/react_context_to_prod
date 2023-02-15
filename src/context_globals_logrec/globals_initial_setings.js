@@ -26,6 +26,15 @@ initial_setings.current_application.title.mode_show=true
 initial_setings.current_application.title.mode_position='left'
 
 initial_setings.current_application.background={}
+
+
+// TODO COLOR background_color_show
+//=== DOC https://angrytools.com/gradient/
+initial_setings.current_application.background.background_color_show=false // default=image, color, video
+initial_setings.current_application.background.background_data_color_value_source_type='' //still gradient
+initial_setings.current_application.background.background_data_color_value=''
+initial_setings.current_application.background.background_data_color_opacity=''
+
 initial_setings.current_application.background.background_media_image_show=false // default=image, color, video
 initial_setings.current_application.background.background_data_image_value_source_type='' //url, file
 initial_setings.current_application.background.background_data_image_value=''

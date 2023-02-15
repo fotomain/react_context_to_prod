@@ -55,6 +55,8 @@ const App: React.FC = () => {
 
     const { global_props,global_dispatch } = React.useContext(Context);
 
+    var data_background_color:any =  ''
+
     var data_background_video:any =  ''
         console.log("=== VVV global_props",global_props)
         if(
@@ -127,7 +129,7 @@ const App: React.FC = () => {
         }
         else
         {
-            data_background_image =  require('./images_app/bkg3.jpg')
+            // data_background_image =  require('./images_app/bkg3.jpg')
         }
         console.log("=== data_background_picture",data_background_image)
 
@@ -144,8 +146,8 @@ const App: React.FC = () => {
                     justifyContent:'space-between',
                     alignItems:'top',
 
-                    paddingLeft:'5%',
-                    paddingRight:'5%',
+                    paddingLeft:'15%',
+                    paddingRight:'15%',
 
                     }}
             >
@@ -154,7 +156,24 @@ const App: React.FC = () => {
 
             {/*=== !!! state IMPORTANT do it for static URL also*/}
 
-            {/*============ BASE64 ================*/}
+
+            {/*============ CCCCCCCCCCC  ================*/}
+            <div
+                style={{
+                    zIndex:6,
+
+                    background: 'linear-gradient(85deg, rgba(34,193,195,1) 0%, rgba(179,191,111,1) 37%, rgba(177,116,190,1) 80%, rgba(253,45,219,1) 99%)',
+                    // backgroundColor:'green',
+                    position: 'absolute',
+                    opacity:'0.5',
+                    top: '0',
+                    left: '0',
+                    height:'100%',
+                    width:'100%',
+
+                }}
+            ></div>
+
 
 
             {(!data_background_image)?'no image...':

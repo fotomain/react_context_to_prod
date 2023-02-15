@@ -1,17 +1,37 @@
 
 
-
+// TODO
+// TODO
+//  initial checked from state = background_media_image_show
+// TODO
+//  initial checked from state = background_media_video_show
 
 import * as React from 'react';
 import {Context} from "../context_globals_logrec/context";
-import {Box, Button} from "@mui/material";
+import {Accordion, AccordionDetails, Box, Button, } from "@mui/material";
+import   MuiAccordionSummary, {AccordionSummaryProps} from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+
 
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Typography from "@mui/material/Typography";
+import {styled} from "@mui/styles";
 
+import { Theme } from '@mui/material/styles';
+
+declare module '@mui/styles/defaultTheme' {
+    // eslint-disable-next-line
+    // @typescript-eslint/no-empty-interface
+    // (remove this line if you don't have the rule enabled)
+    interface DefaultTheme extends Theme {}
+}
 
 const Settings_Part_Background: React.FC = () => {
 
@@ -142,14 +162,51 @@ const Settings_Part_Background: React.FC = () => {
         })
     };
 
+    const Checkbox_Image = () => {
+      return(
+          <FormControlLabel
+              name="check_image_option"
+              label="image"
+              control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+          />
+      )
+    }
+
+    const [expanded1, setExpanded1] = React.useState<boolean>(false);
+
+
+    const theme = createTheme();
+
+    const AccordionSummary = styled((props: AccordionSummaryProps) => (
+        <MuiAccordionSummary
+            expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+            {...props}
+        />
+    ))(({ theme }) => ({
+        backgroundColor:'green'
+            // theme.palette.mode === 'dark'
+            //     ? 'rgba(255, 255, 255, .05)'
+            //     : 'rgba(0, 0, 0, .03)'
+        ,
+        flexDirection: 'row-reverse',
+        '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+            transform: 'rotate(90deg)',
+        },
+        '& .MuiAccordionSummary-content': {
+            marginLeft: theme.spacing(1),
+            backgroundColor:'green'
+        },
+    }));
 
     return (
+        <ThemeProvider theme={theme}>
 
     <Box>
 
         <Box>
             <p>{JSON.stringify(checked)}</p>
             <p>You can choose options for the background</p>
+            <p>https://cssgradient.io/</p>
             <FormControlLabel
                 label="use all options"
                 control={
@@ -164,44 +221,77 @@ const Settings_Part_Background: React.FC = () => {
             <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
                 {/*== IIIIIIIII check_image_option*/}
                 <Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
-                    <FormControlLabel
-                        name="check_image_option"
-                        label="image"
-                        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-                    />
 
-                    <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
-
-                        {/*codesandbox image from base65*/}
-
-                        <input
-                            color="primary"
-                            accept="image/*"
-                            type="file"
-                            onChange={(e)=> {
-                                getFile(e)
-                            }}
-                            id="file1input"
-                            style={{ display: 'none', }}
-                        />
-
-                        <label htmlFor="file1input">
-                            <Button
-                                component="span"
-                                variant="contained"
-                            >
-                                Upload image
-                                <input
-                                    type="file"
-                                    hidden
-                                />
-                            </Button>
-                        </label>
+                    {(state.display_box_image)?'':
+                    <Checkbox_Image/>
+                    }
 
 
-                    </Box>
+                    {/*<FormControlLabel*/}
+                    {/*    name="check_image_option"*/}
+                    {/*    label="image"*/}
+                    {/*    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}*/}
+                    {/*/>*/}
+
 
                 </Box>
+
+                {(!state.display_box_image)?'':
+                    <Accordion id={'accord_image'} expanded={expanded1} onChange={()=>{
+                        setExpanded1(!expanded1)
+                    }}>
+                        <AccordionSummary
+                            id={'accord_image_summary'}
+                            style={{padding:'0px', marginTop:'0px'}}
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1bh-content"
+
+                        >
+                                <Checkbox_Image/>
+
+                            {/*<Typography sx={{ width: '33%', flexShrink: 0 }}>*/}
+                            {/*    General settings*/}
+                            {/*</Typography>*/}
+                            {/*<Typography sx={{ color: 'text.secondary' }}>I am an accordion</Typography>*/}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                Select
+                            </Typography>
+                            <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
+
+                                {/*codesandbox image from base65*/}
+
+                                <input
+                                    color="primary"
+                                    accept="image/*"
+                                    type="file"
+                                    onChange={(e)=> {
+                                        getFile(e)
+                                    }}
+                                    id="file1input"
+                                    style={{ display: 'none', }}
+                                />
+
+                                <label htmlFor="file1input">
+                                    <Button
+                                        component="span"
+                                        variant="contained"
+                                    >
+                                        Upload image
+                                        <input
+                                            type="file"
+                                            hidden
+                                        />
+                                    </Button>
+                                </label>
+
+
+                            </Box>
+
+                        </AccordionDetails>
+                    </Accordion>
+                }
 
                 {/*== VVVVVVVVVV check_video_option*/}
                 <Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
@@ -308,7 +398,7 @@ const Settings_Part_Background: React.FC = () => {
 
         </Box>
         </Box>
-
+        </ThemeProvider>
   );
 };
 
