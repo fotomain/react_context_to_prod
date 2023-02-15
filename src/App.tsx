@@ -58,7 +58,7 @@ const App: React.FC = () => {
     var data_background_video:any =  ''
         console.log("=== VVV global_props",global_props)
         if(
-            "video"==global_props.current_application.background.background_media_type
+            global_props.current_application.background.background_media_video_show
             &&
             ''!=global_props.current_application.background.background_data_video_value
             // && file or url
@@ -67,16 +67,53 @@ const App: React.FC = () => {
 
             data_background_video=global_props.current_application.background.background_data_video_value
             // data_background_video='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
-            console.log("=== data_background_video START",Date)
+            // console.log("=== data_background_video START",Date)
+
+            // // data:video/mp4;base64,
+            // const b64toBlob = (b64Data:any, contentType='', sliceSize=512) => {
+            //     const byteCharacters = window.atob(b64Data);
+            //     const byteArrays = [];
+            //
+            //     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            //         const slice = byteCharacters.slice(offset, offset + sliceSize);
+            //
+            //         const byteNumbers = new Array(slice.length);
+            //         for (let i = 0; i < slice.length; i++) {
+            //             byteNumbers[i] = slice.charCodeAt(i);
+            //         }
+            //
+            //         const byteArray = new Uint8Array(byteNumbers);
+            //         byteArrays.push(byteArray);
+            //     }
+            //
+            //     const blob = new Blob(byteArrays, {type: contentType});
+            //     return blob;
+            // }
+            //
+            //
+            // const contentType = 'video/mp4';
+            // const b64Data = data_background_video.replace('data:video/mp4;base64,','')
+            //
+            // const blob = b64toBlob(b64Data, contentType);
+            //
+            // // const blobUrl = URL.createObjectURL(blob);
+            // // const img = document.createElement('video');
+            // // img.src = blobUrl;
+            // // document.body.appendChild(img);
+            // data_background_video = blob
+            // // console.log("=== data_background_video BLOB",data_background_video)
+            //
+
+            console.log("=== data_background_video BLOB",data_background_video)
 
         }
-        console.log("=== data_background_picture",data_background_picture)
 
-    var data_background_picture:any =  ''
-    data_background_picture =  require('./images_app/bkg3.jpg')
+
+    var data_background_image:any =  ''
+
         console.log("=== 111 global_props",global_props)
         if(
-            "image"==global_props.current_application.background.background_media_type
+            global_props.current_application.background.background_media_image_show
             &&
             ''!=global_props.current_application.background.background_data_image_value
             // && file or url
@@ -84,12 +121,15 @@ const App: React.FC = () => {
         {
 
             console.log("=== 222 global_props",global_props)
-            data_background_picture=global_props.current_application.background.background_data_image_value
+            data_background_image=global_props.current_application.background.background_data_image_value
             // data_background_picture='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
 
-
         }
-        console.log("=== data_background_picture",data_background_picture)
+        else
+        {
+            data_background_image =  require('./images_app/bkg3.jpg')
+        }
+        console.log("=== data_background_picture",data_background_image)
 
 
 
@@ -98,14 +138,6 @@ const App: React.FC = () => {
         <IonApp className={'div_full_screen'}
 
                 style={{
-                    zIndex:5,
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover", //!!! NO VISUAL DISTORTINOS
-                    // backgroundSize:'100%  100%',
-                    backgroundPosition: "center",
-                    // no-repeat center / cover
-
-                    backgroundImage: 'url(' + data_background_picture + ')' ,
 
                     display:'flex',
                     flexDirection:'column',
@@ -121,30 +153,81 @@ const App: React.FC = () => {
             {/*https://artlist.io/stock-footage/clip/pyramids-egypt-ancient-giza/617748*/}
 
             {/*=== !!! state IMPORTANT do it for static URL also*/}
-            {(!data_background_video)?'no video...':
-            <video  id={'#video0'}
+
+            {/*============ BASE64 ================*/}
+
+
+            {(!data_background_image)?'no image...':
+                <div
                     style={{
-                        zIndex:10, opacity:'0.3',
-                        objectFit: 'cover',
+                        zIndex:5,
+                        // opacity:'0.3',
+                        backgroundImage: 'url(' + data_background_image + ')' ,
+                        backgroundRepeat: "no-repeat",
+
+                        backgroundSize: "cover", //!!! NO VISUAL DISTORTINOS
+                        backgroundPosition: "center",
+
+                        // objectFit: 'cover',
                         position: 'absolute',
                         top: '0',
                         left: '0',
                         height:'100%',
                         width:'100%',
+
                     }}
-
-                    autoPlay={true}
-
-                    loop
-                    src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'}
-                    // src={data_background_video}
-                    // width="320" height="240" controls
-                    // width="100%" height="100%" controls
-            >
-                <source src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+                ></div>
             }
+
+            {(!data_background_video)?'no video...':
+                <video  id={'#video0'}
+                        style={{
+                            zIndex:10,
+                            // opacity:'0.3',
+                            objectFit: 'cover',
+                            position: 'absolute',
+                            top: '0',
+                            left: '0',
+                            height:'100%',
+                            width:'100%',
+                        }}
+
+                        autoPlay={true}
+
+                        loop
+                        // src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'}
+                    src={data_background_video}
+                >
+                    <source src={data_background_video}  />
+                    Your browser does not support the video tag.
+                </video>
+            }
+
+
+            {/*{(false && !data_background_video)?'no video...':*/}
+            {/*<video  id={'#video0'}*/}
+            {/*        style={{*/}
+            {/*            zIndex:10, opacity:'0.3',*/}
+            {/*            objectFit: 'cover',*/}
+            {/*            position: 'absolute',*/}
+            {/*            top: '0',*/}
+            {/*            left: '0',*/}
+            {/*            height:'100%',*/}
+            {/*            width:'100%',*/}
+            {/*        }}*/}
+
+            {/*        autoPlay={true}*/}
+
+            {/*        loop*/}
+            {/*        src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'}*/}
+            {/*        // src={data_background_video}*/}
+            {/*        // width="320" height="240" controls*/}
+            {/*        // width="100%" height="100%" controls*/}
+            {/*>*/}
+            {/*    <source src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'} type="video/mp4" />*/}
+            {/*    Your browser does not support the video tag.*/}
+            {/*</video>*/}
+            {/*}*/}
 
 
             <AppWorkPage/>

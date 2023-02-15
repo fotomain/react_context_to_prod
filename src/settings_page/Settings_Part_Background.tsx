@@ -4,10 +4,14 @@
 
 import * as React from 'react';
 import {Context} from "../context_globals_logrec/context";
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
 
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
+
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 
 const Settings_Part_Background: React.FC = () => {
 
@@ -21,6 +25,8 @@ const Settings_Part_Background: React.FC = () => {
         header1:'',
         file1:'',
         image_base64:'',
+        display_box_image:false,
+        display_box_video:false,
     });
 
     const getFileHeader = (file:any) => {
@@ -60,7 +66,7 @@ const Settings_Part_Background: React.FC = () => {
                 image.src = file_data;
 
                 const tdata = global_props.current_application
-                tdata.background.background_media_type = "image"
+                tdata.background.background_media_image_show = true
                 tdata.background.background_data_image_value_source_type = 'file'
                 tdata.background.background_data_image_value = file_data
                 console.log("=== tdata",tdata)
@@ -79,6 +85,7 @@ const Settings_Part_Background: React.FC = () => {
     };
 
     const getFile = (e:any) => {
+        console.log("=== getFile ",e)
         if(e.target && e.target.files) {
             const file1 = e.target.files[0];
             setState({...state, "file1": file1});
@@ -106,23 +113,114 @@ const Settings_Part_Background: React.FC = () => {
     };
 
 
+    const [checked, setChecked] = React.useState([state.display_box_image, state.display_box_video]);
+
+    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([event.target.checked, event.target.checked]);
+        setState({
+            ...state,
+            display_box_image:event.target.checked,
+            display_box_video:event.target.checked,
+        })
+    };
+
+    const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([event.target.checked, checked[1]]);
+        setState({
+            ...state,
+            display_box_image:event.target.checked,
+            display_box_video:checked[1],
+        })
+    };
+
+    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([checked[0], event.target.checked]);
+        setState({
+            ...state,
+            display_box_image:checked[0],
+            display_box_video:event.target.checked,
+        })
+    };
+
+
     return (
 
-        <Box>
-        <Box>
-
-            {/*codesandbox image from base65*/}
-
-            <input type="file" id="archivo" name="archivo" onChange={getFile} />
-
-            {(!state.image_base64)?'':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
-
-
-        </Box>
+    <Box>
 
         <Box>
+            <p>You can choose options for the background</p>
+            <FormControlLabel
+                label="use all options"
+                control={
+                    <Checkbox
+                        checked={checked[0] && checked[1]}
+                        indeterminate={checked[0] !== checked[1]}
+                        onChange={handleChange1}
+                    />
+                }
+            />
 
-            <input type="file" id="archivo" name="archivo" onChange={(event:any)=>{
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+                <FormControlLabel
+                    label="image"
+                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                />
+                <FormControlLabel
+                    label="video"
+                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                />
+            </Box>
+
+            {/*=== IIIIIIIIIIIII*/}
+            <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
+
+                {/*codesandbox image from base65*/}
+
+                {/*<input style={{display: 'none'}} type="file" id="file1input" onChange={(e)=> {*/}
+                {/*    getFile(e)*/}
+                {/*}} />*/}
+
+                <input
+                    color="primary"
+                    accept="image/*"
+                    type="file"
+                    onChange={(e)=> {
+                        getFile(e)
+                    }}
+                    id="file1input"
+                    style={{ display: 'none', }}
+                />
+
+                <label htmlFor="file1input">
+                    <Button
+                        component="span"
+                        variant="contained"
+                    >
+                        Upload image
+                        <input
+                            type="file"
+                            hidden
+                        />
+                    </Button>
+                </label>
+
+                {(!state.image_base64)?'':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
+
+
+            </Box>
+
+            <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
+
+
+
+            <input
+                style={{display: 'none'}}
+                // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+                accept="video/mp4,video/x-m4v"
+                type="file"
+                id="file2input"
+
+                onChange={(event:any)=>{
                 let file = event.target.files[0];
 
                 // let blobURL = URL.createObjectURL(file);
@@ -145,7 +243,7 @@ const Settings_Part_Background: React.FC = () => {
                     console.log("=== src = file_data ")
 
                     const tdata = global_props.current_application
-                    tdata.background.background_media_type = "video"
+                    tdata.background.background_media_video_show = true
                     tdata.background.background_data_video_value_source_type = 'file'
                     tdata.background.background_data_video_value = file_data
                     console.log("=== tdata",tdata)
@@ -162,18 +260,36 @@ const Settings_Part_Background: React.FC = () => {
             }} />
 
 
-            {(0==file_data_video.length)?'no video selected':
-            <video  id={'#video1'}
+                <label htmlFor="file2input">
+                    <Button
+                        component="span"
+                        variant="contained"
+                    >
+                        Upload video
+                        <input
+                            type="file"
+                            hidden
+                        />
+                    </Button>
+                </label>
 
-                    src={file_data_video}
-                    autoPlay
-                    loop
 
-                    width="150" height="150" controls
-            >
-                Your browser does not support the video tag.
-            </video>
-            }
+                {(0==file_data_video.length)?'no video selected':
+                    <video  id={'#video1'}
+
+                            src={file_data_video}
+                            autoPlay
+                            loop
+
+                            width="150" height="150" controls
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                }
+
+            </Box>
+
+
 
         </Box>
         </Box>
