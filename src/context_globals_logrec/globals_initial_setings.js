@@ -21,7 +21,7 @@ initial_setings.current_user.laxt_name='not_defined'
 
 initial_setings.current_application={} //=============================== APP
 initial_setings.current_application.title={}
-initial_setings.current_application.title.text='111 All Best Posts' // image, color
+initial_setings.current_application.title.text='555 All Best Posts' // image, color
 initial_setings.current_application.title.mode_show=true
 initial_setings.current_application.title.mode_position='left'
 
