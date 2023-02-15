@@ -32,6 +32,6 @@ initial_setings.current_application.background.background_data_image_value=''
 initial_setings.current_application.background.background_data_image_opacity=''
 
 initial_setings.current_application.background.background_media_video_show=false // default=image, color, video
-initial_setings.current_application.background.background_data_video_source_type='' //url, file
+initial_setings.current_application.background.background_data_video_value_source_type='' //url, file
 initial_setings.current_application.background.background_data_video_value=''
 initial_setings.current_application.background.background_data_video_opacity=''

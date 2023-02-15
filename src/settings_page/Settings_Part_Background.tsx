@@ -148,6 +148,7 @@ const Settings_Part_Background: React.FC = () => {
     <Box>
 
         <Box>
+            <p>{JSON.stringify(checked)}</p>
             <p>You can choose options for the background</p>
             <FormControlLabel
                 label="use all options"
@@ -161,131 +162,145 @@ const Settings_Part_Background: React.FC = () => {
             />
 
             <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-                <FormControlLabel
-                    label="image"
-                    control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-                />
-                <FormControlLabel
-                    label="video"
-                    control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-                />
-            </Box>
+                {/*== IIIIIIIII check_image_option*/}
+                <Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
+                    <FormControlLabel
+                        name="check_image_option"
+                        label="image"
+                        control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+                    />
 
-            {/*=== IIIIIIIIIIIII*/}
-            <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
+                    <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
 
-                {/*codesandbox image from base65*/}
+                        {/*codesandbox image from base65*/}
 
-                {/*<input style={{display: 'none'}} type="file" id="file1input" onChange={(e)=> {*/}
-                {/*    getFile(e)*/}
-                {/*}} />*/}
-
-                <input
-                    color="primary"
-                    accept="image/*"
-                    type="file"
-                    onChange={(e)=> {
-                        getFile(e)
-                    }}
-                    id="file1input"
-                    style={{ display: 'none', }}
-                />
-
-                <label htmlFor="file1input">
-                    <Button
-                        component="span"
-                        variant="contained"
-                    >
-                        Upload image
                         <input
+                            color="primary"
+                            accept="image/*"
                             type="file"
-                            hidden
+                            onChange={(e)=> {
+                                getFile(e)
+                            }}
+                            id="file1input"
+                            style={{ display: 'none', }}
                         />
-                    </Button>
-                </label>
 
-                {(!state.image_base64)?'':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
-
-
-            </Box>
-
-            <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
-
-
-
-            <input
-                style={{display: 'none'}}
-                // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
-                accept="video/mp4,video/x-m4v"
-                type="file"
-                id="file2input"
-
-                onChange={(event:any)=>{
-                let file = event.target.files[0];
-
-                // let blobURL = URL.createObjectURL(file);
-                // console.log("=== blobURL",blobURL)
-
-                set_file2_loading_video(true)
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function (event:any) {
-                    const file_data = event.target.result
-                    console.log("=== base64 ",file_data)
+                        <label htmlFor="file1input">
+                            <Button
+                                component="span"
+                                variant="contained"
+                            >
+                                Upload image
+                                <input
+                                    type="file"
+                                    hidden
+                                />
+                            </Button>
+                        </label>
 
 
+                    </Box>
 
-                    // const el = document.getElementById("#video1") as HTMLVideoElement
-                    set_file2_loading_video(false)
-                    set_file_data_video(file_data)
-                    // if (el) el.src = file_data;
+                </Box>
 
-                    console.log("=== src = file_data ")
+                {/*== VVVVVVVVVV check_video_option*/}
+                <Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
 
-                    const tdata = global_props.current_application
-                    tdata.background.background_media_video_show = true
-                    tdata.background.background_data_video_value_source_type = 'file'
-                    tdata.background.background_data_video_value = file_data
-                    console.log("=== tdata",tdata)
-                    console.log("=== SETTER_APPLICATION start ",tdata)
-                    global_dispatch({
-                        type: 'SETTER_APPLICATION',
-                        global_new_data:{current_application:tdata},
-                    })
+                    <FormControlLabel
+                        name="check_video_option"
+                        label="video"
+                        control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+                    />
 
 
-                }
+                    <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
 
-
-            }} />
-
-
-                <label htmlFor="file2input">
-                    <Button
-                        component="span"
-                        variant="contained"
-                    >
-                        Upload video
                         <input
+                            style={{display: 'none'}}
+                            // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+                            accept="video/mp4,video/x-m4v"
                             type="file"
-                            hidden
-                        />
-                    </Button>
-                </label>
+                            id="file2input"
+
+                            onChange={(event:any)=>{
+                                let file = event.target.files[0];
+
+                                // let blobURL = URL.createObjectURL(file);
+                                // console.log("=== blobURL",blobURL)
+
+                                set_file2_loading_video(true)
+                                const fileReader = new FileReader();
+                                fileReader.readAsDataURL(file);
+                                fileReader.onload = function (event:any) {
+                                    const file_data = event.target.result
+                                    console.log("=== base64 ",file_data)
 
 
-                {(0==file_data_video.length)?'no video selected':
-                    <video  id={'#video1'}
 
-                            src={file_data_video}
-                            autoPlay
-                            loop
+                                    // const el = document.getElementById("#video1") as HTMLVideoElement
+                                    set_file2_loading_video(false)
+                                    set_file_data_video(file_data)
+                                    // if (el) el.src = file_data;
 
-                            width="150" height="150" controls
-                    >
-                        Your browser does not support the video tag.
-                    </video>
-                }
+                                    console.log("=== src = file_data ")
+
+                                    const tdata = global_props.current_application
+                                    tdata.background.background_media_video_show = true
+                                    tdata.background.background_data_video_value_source_type = 'file'
+                                    tdata.background.background_data_video_value = file_data
+                                    console.log("=== tdata",tdata)
+                                    console.log("=== SETTER_APPLICATION start ",tdata)
+                                    global_dispatch({
+                                        type: 'SETTER_APPLICATION',
+                                        global_new_data:{current_application:tdata},
+                                    })
+
+
+                                }
+
+
+                            }} />
+
+
+                        <label htmlFor="file2input">
+                            <Button
+                                component="span"
+                                variant="contained"
+                            >
+                                Upload video
+                                <input
+                                    type="file"
+                                    hidden
+                                />
+                            </Button>
+                        </label>
+
+                    </Box> {/*video*/}
+
+                </Box> {/*VVVVVVVVVVVVV*/}
+
+                <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
+                    <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
+                        {(state.image_base64.length==0)?'no image selected':<img style={{width:400, height:400}} width={'100%'} height={'100%'} src={state.image_base64}  />}
+                    </Box>
+
+                    <Box sx={{ display: (checked[1])?'flex':'none', flexDirection: 'column',  }}>
+
+                        {(file_data_video.length==0)?'no video selected':
+                            <video  id={'#video1'}
+
+                                    src={file_data_video}
+                                    autoPlay
+                                    loop
+
+                                    width="150" height="150" controls
+                            >
+                                Your browser does not support the video tag.
+                            </video>
+                        }
+                    </Box>
+
+                </Box>
 
             </Box>
 
