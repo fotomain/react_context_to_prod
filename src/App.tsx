@@ -47,6 +47,8 @@ import LogrecForm from "./context_globals_logrec/LogrecForm";
 import './App.css'
 import Settings from "./settings_page/Settings";
 import AppWorkPage from "./AppWorkPage";
+import UploadFiles from "./comp_dropzone/UploadFiles";
+import DropFilesZone from "./comp_dropzone1/DropZone3";
 
 setupIonicReact();
 
@@ -137,7 +139,7 @@ const App: React.FC = () => {
 
     return (
 
-        <IonApp className={'div_full_screen'}
+        <div className={'div_full_screen'}
 
                 style={{
 
@@ -248,9 +250,10 @@ const App: React.FC = () => {
             {/*</video>*/}
             {/*}*/}
 
+            <DropFilesZone/>
 
             <AppWorkPage/>
-        </IonApp>
+        </div>
 
     )
 };

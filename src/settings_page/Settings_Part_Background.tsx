@@ -14,8 +14,11 @@ import {Box, Button} from "@mui/material";
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
 
+import { FileError, FileRejection, useDropzone } from 'react-dropzone';
+
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import DropFilesZone from "../comp_dropzone1/DropZone3";
 
 
 const Settings_Part_Background: React.FC = () => {
@@ -158,12 +161,46 @@ const Settings_Part_Background: React.FC = () => {
       )
     }
 
+    const onDrop = (acceptedFiles:any) => {
+        console.log("=== acceptedFiles ",acceptedFiles)
+        getFile(acceptedFiles[0])
+    };
+
+    const { isDragActive, getRootProps, getInputProps } = useDropzone({
+        onDrop,
+        // accept: 'image/*',
+        // accept:
+            // [['image/*'], ['video/*'], ['.pdf']],
+            // 'text/html': ['.html', '.htm'],
+            //         {
+            //             'image/*': ['.png','.jpeg','.jpg','.tif','.gif'],
+            //         },
+        // maxSize: 300 * 1024, // 300KB
+        maxSize: 50000 * 1024, // 300KB
+    });
+
     const Upload_Image_Button = () => {
         return(
-            <Box>
-                <Box sx={{ display:(state.display_box_image)?'block':'none' }}>
+            <Box style={{ zIndex:'99' }}>
+                <DropFilesZone />
+                <Box sx={{  display:(state.display_box_image)?'block':'none' }}>
+                       <div style={{zIndex:'99', height:'80px', backgroundColor:'lightgray'}}
+                             {...getRootProps({
+                                 onClick:(e:any)=>console.log(e),
+                                 role: 'button',
+                                 'aria-label': 'drag and drop area',
+                             })}
+                        >
+                        {/*codesandbox image from base65*/}
+                            <input {...getInputProps()} />
+                            {
+                                isDragActive ?
+                                    <p>11Drop the files here ...</p> :
+                                    <p>22Drag 'n' drop some files here, or click to select files</p>
+                            }
 
-                    {/*codesandbox image from base65*/}
+                        </div>
+
 
                     <input
                         color="primary"

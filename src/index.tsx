@@ -14,13 +14,13 @@ const root = createRoot(container!);
 const co1 = ()=>{
 
     return(
-    <React.StrictMode>
+    // <React.StrictMode>
 
         <Globals_Provider>
             <App/>
         </Globals_Provider>
 
-    </React.StrictMode>
+    // </React.StrictMode>
 )
 }
 

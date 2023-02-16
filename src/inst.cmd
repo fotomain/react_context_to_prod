@@ -18,6 +18,10 @@ call npm install styled-components@latest
 call npm install --save-dev @types/styled-components@latest
 call npm install @ionic/storage
 
+
+call npm install --save react-dropzone-uploader
+
+
 @REM call npm i @capacitor/device
 @REM call npm i react-virtuoso
 @REM call npm i react-beautiful-dnd
