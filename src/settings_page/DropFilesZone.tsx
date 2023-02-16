@@ -2,6 +2,7 @@
 
 import React from 'react'
 import classNames from 'classnames'
+import {Alert} from "@mui/material";
 
 interface DropZoneProps {
     onDragStateChange?: (isDragActive: boolean) => void
@@ -135,11 +136,7 @@ const DropZone = React.memo(
 )
 
 
-
-
 const DropFilesZone = React.memo(() => {
-
-
 
 // Create "active" state for dropzone:
     const [isDropActive, setIsDropActive] = React.useState(false)
@@ -182,17 +179,18 @@ const DropFilesZone = React.memo(() => {
         >
             {/* Render the dropzone */}
             <DropZone onDragStateChange={onDragStateChange} onFilesDrop={onFilesDrop}>
-                <h2>Drop your files here</h2>
+                    <h5>Drop your files here</h5>
 
-                {files.length === 0 ? (
-                    <h3>No files to upload</h3>
-                ) : (
-                    <h3>Files to upload: {files.length}</h3>
-                )}
+                    {files.length === 0 ? (
+                        <h6>No files to upload</h6>
+                    ) : (
+                        <h6>Files to upload: {files.length}</h6>
+                    )}
 
                 {/* Render the file list */}
                 <FileList files={files} />
             </DropZone>
+
         </div>
     )
 

@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {Context} from "../context_globals_logrec/context";
-import {Box, Button} from "@mui/material";
+import {Alert, Box, Button, Card} from "@mui/material";
 
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
@@ -18,7 +18,7 @@ import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import DropFilesZone from "../comp_dropzone1/DropZone3";
+import DropFilesZone from "./DropFilesZone";
 
 
 const Settings_Part_Background: React.FC = () => {
@@ -182,43 +182,41 @@ const Settings_Part_Background: React.FC = () => {
     const Upload_Image_Button = () => {
         return(
             <Box style={{ zIndex:'99' }}>
-                <DropFilesZone />
-                <Box sx={{  display:(state.display_box_image)?'block':'none' }}>
-                       <div style={{zIndex:'99', height:'80px', backgroundColor:'lightgray'}}
-                             {...getRootProps({
-                                 onClick:(e:any)=>console.log(e),
-                                 role: 'button',
-                                 'aria-label': 'drag and drop area',
-                             })}
-                        >
-                        {/*codesandbox image from base65*/}
-                            <input {...getInputProps()} />
-                            {
-                                isDragActive ?
-                                    <p>11Drop the files here ...</p> :
-                                    <p>22Drag 'n' drop some files here, or click to select files</p>
-                            }
 
-                        </div>
+                <Box style={{  display:(state.display_box_image)?'flex':'none' }}>
+
+                    <Card variant='outlined' color="info" sx={{border: '1px dashed', borderRadius:'10%', borderColor: 'green', opacity:'0.8', padding:'35px'}}>
+                    <Box style={{ display:'flex',
+                        flexDirection: 'column',
+                        justifyContent:'center',
+                        alignItems:"center",
+                    }}>
 
 
-                    <input
-                        color="primary"
-                        accept="image/*"
-                        type="file"
-                        onChange={(e)=> {
-                            getFile(e)
-                        }}
-                        id="file1input"
-                        style={{ display: 'none', }}
-                    />
+
+                        <DropFilesZone />
+
+                    <p>or press</p>
+
+                            <input
+                                color="primary"
+                                accept="image/*"
+                                type="file"
+                                onChange={(e)=> {
+                                    getFile(e)
+                                }}
+                                id="file1input"
+                                style={{ zIndex:'99', display: 'none', }}
+                            />
+
 
                     <label htmlFor="file1input">
+
                         <Button
                             component="span"
                             variant="contained"
                         >
-                            Upload image
+                            Start Upload
                             <input
                                 type="file"
                                 hidden
@@ -226,6 +224,8 @@ const Settings_Part_Background: React.FC = () => {
                         </Button>
                     </label>
 
+                    </Box>
+                    </Card>
 
                 </Box>
 

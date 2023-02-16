@@ -48,7 +48,7 @@ import './App.css'
 import Settings from "./settings_page/Settings";
 import AppWorkPage from "./AppWorkPage";
 import UploadFiles from "./comp_dropzone/UploadFiles";
-import DropFilesZone from "./comp_dropzone1/DropZone3";
+import DropFilesZone from "./settings_page/DropFilesZone";
 
 setupIonicReact();
 
