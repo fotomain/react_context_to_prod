@@ -3,11 +3,14 @@
 
 // git remote add origin https://github.com/fotomain/vit_ionic_play1.git
 // ionic build
-// ionic build--prod; ionic cap copy --prod; ionic serve
+// ionic build --prod; ionic cap copy --prod; ionic serve
 // npm i swiper
 //=== DOC COOL https://thetechbee.medium.com/creating-a-slide-using-swiper-js-in-ionic-react-in-5-steps-2022-mobile-app-development-for-52f4cb80d2ce
 
+// ionic cap add android; ionic build --prod; ionic cap copy --prod
+
 // npm install --save-dev @types/styled-components-react-native
+
 
 import React, {useEffect, useState} from 'react';
 
@@ -47,8 +50,9 @@ import LogrecForm from "./context_globals_logrec/LogrecForm";
 import './App.css'
 import Settings from "./settings_page/Settings";
 import AppWorkPage from "./AppWorkPage";
-import UploadFiles from "./comp_dropzone/UploadFiles";
+
 import DropFilesZone from "./settings_page/DropFilesZone";
+import GoogleSignIn from "./comp_signin_signup/GoogleSignIn";
 
 setupIonicReact();
 
@@ -249,6 +253,8 @@ const App: React.FC = () => {
             {/*    Your browser does not support the video tag.*/}
             {/*</video>*/}
             {/*}*/}
+
+            <GoogleSignIn />
 
             <DropFilesZone/>
 

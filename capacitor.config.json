@@ -1,6 +1,15 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "io.ionic888999.com",
 	"appName": "lll",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"GoogleAuth": {
+		"scopes": ["profile", "email"],
+		"clientId": "47192713780-k5e4brld4r7oplndec5fi5kcdra765s7.apps.googleusercontent.com",
+		"serverClientId": "47192713780-k5e4brld4r7oplndec5fi5kcdra765s7.apps.googleusercontent.com",
+		"grantOfflineAccess": true,
+		"forceCodeForRefreshToken": true
+	}
+
+
 }
