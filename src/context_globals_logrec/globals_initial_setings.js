@@ -23,7 +23,7 @@ initial_setings.current_application={} //=============================== APP
 initial_setings.current_application.title={}
 initial_setings.current_application.title.text='555 All Best Posts' // image, color
 initial_setings.current_application.title.mode_show=true
-initial_setings.current_application.title.mode_position='left'
+initial_setings.current_application.title.mode_position='left' // left middle rigth
 
 initial_setings.current_application.background={}
 
@@ -44,3 +44,10 @@ initial_setings.current_application.background.background_media_video_show=false
 initial_setings.current_application.background.background_data_video_value_source_type='' //url, file
 initial_setings.current_application.background.background_data_video_value=''
 initial_setings.current_application.background.background_data_video_opacity=''
+
+// TODO
+// initial_setings.current_application.title.mode_position='left' // left middle rigth
+
+initial_setings.current_application.background.background_media_video_show_multiply_files=false
+// + every -> show_from_url or download_and_show
+initial_setings.current_application.background.background_data_video_value_source_type_url_mode_show='' //show_from_url or download_and_show

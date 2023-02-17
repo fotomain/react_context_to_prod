@@ -192,8 +192,6 @@ const Settings_Part_Background: React.FC = () => {
                         alignItems:"center",
                     }}>
 
-
-
                         <DropFilesZone />
 
                     <p>or press</p>
