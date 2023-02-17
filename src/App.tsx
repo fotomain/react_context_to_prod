@@ -21,6 +21,7 @@ import Home from './pages/Home';
 import ViewMessage from './pages/ViewMessage';
 // import { Player } from "video-react";
 /* Core CSS required for Ionic components to work properly */
+
 import '@ionic/react/css/core.css';
 
 
