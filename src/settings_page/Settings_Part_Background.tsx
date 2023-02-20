@@ -24,6 +24,33 @@ import {log} from "util";
 
 const Settings_Part_Background: React.FC = () => {
 
+    // const debub_mode = true
+    const debub_mode = false
+
+    const debub_border = (props?:any) => {
+
+        if(null==props && undefined!=props){
+            console.log("=== props debub_border", props)
+            return {}
+        }
+
+        if(undefined==props){
+        if(debub_mode){
+            return {border:"1px solid", borderColor:'pink',}
+        }
+        }
+
+        if(typeof props == 'string'){
+            console.log("=== typeof props == 'string' ",props)
+            if(debub_mode){
+                return {border:"3px solid", borderColor:`${props}`,}
+            }
+        }
+
+        return {}
+
+    }
+
     const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [file2_loading_video, set_file2_loading_video] = useState(false);
@@ -233,6 +260,18 @@ const Settings_Part_Background: React.FC = () => {
         maxSize: 50000 * 1024, // 300KB
     });
 
+    const No_Image_Button = () => {
+        return (
+            <Button
+                variant="contained"
+                onClick={()=>{
+
+                }}
+            >
+                No Image
+            </Button>
+        )
+    }
     const No_Video_Button = () => {
         return (
             <Button
@@ -246,70 +285,6 @@ const Settings_Part_Background: React.FC = () => {
         )
     }
 
-    const Upload_Video_Button = () => {
-        return( <>
-        <input
-            style={{display: 'none'}}
-            // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
-            accept="video/mp4,video/x-m4v"
-            type="file"
-            id="file2input"
-
-            onChange={(event:any)=>{
-                let file = event.target.files[0];
-
-                // let blobURL = URL.createObjectURL(file);
-                // console.log("=== blobURL",blobURL)
-
-                set_file2_loading_video(true)
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
-                fileReader.onload = function (event:any) {
-                    const file_data = event.target.result
-                    console.log("=== base64 ",file_data)
-
-
-
-                    // const el = document.getElementById("#video1") as HTMLVideoElement
-                    set_file2_loading_video(false)
-                    set_file_data_video(file_data)
-                    // if (el) el.src = file_data;
-
-                    console.log("=== src = file_data ")
-
-                    const tdata = global_props.current_application
-                    tdata.background.background_media_video_show = true
-                    tdata.background.background_data_video_value_source_type = 'file'
-                    tdata.background.background_data_video_value = file_data
-                    console.log("=== tdata",tdata)
-                    console.log("=== SETTER_APPLICATION start ",tdata)
-                    global_dispatch({
-                        type: 'SETTER_APPLICATION',
-                        global_new_data:{current_application:tdata},
-                    })
-
-
-                }
-
-
-            }} />
-
-
-        <label htmlFor="file2input">
-            <Button
-                component="span"
-                variant="contained"
-            >
-                Upload video
-                <input
-                    type="file"
-                    hidden
-                />
-            </Button>
-        </label>
-
-        </> )
-    }
 
     const Upload_Image_Button = () => {
         return(
@@ -375,7 +350,7 @@ const Settings_Part_Background: React.FC = () => {
                             component="span"
                             variant="contained"
                         >
-                            Start Upload
+                            Upload
                             <input
                                 type="file"
                                 hidden
@@ -392,6 +367,72 @@ const Settings_Part_Background: React.FC = () => {
 
     }
 
+    const Upload_Video_Button = () => {
+        return( <>
+            <input
+                style={{display: 'none'}}
+                // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+                accept="video/mp4,video/x-m4v"
+                type="file"
+                id="file2input"
+
+                onChange={(event:any)=>{
+                    let file = event.target.files[0];
+
+                    // let blobURL = URL.createObjectURL(file);
+                    // console.log("=== blobURL",blobURL)
+
+                    set_file2_loading_video(true)
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
+                    fileReader.onload = function (event:any) {
+                        const file_data = event.target.result
+                        console.log("=== base64 ",file_data)
+
+
+
+                        // const el = document.getElementById("#video1") as HTMLVideoElement
+                        set_file2_loading_video(false)
+                        set_file_data_video(file_data)
+                        // if (el) el.src = file_data;
+
+                        console.log("=== src = file_data ")
+
+                        const tdata = global_props.current_application
+                        tdata.background.background_media_video_show = true
+                        tdata.background.background_data_video_value_source_type = 'file'
+                        tdata.background.background_data_video_value = file_data
+                        console.log("=== tdata",tdata)
+                        console.log("=== SETTER_APPLICATION start ",tdata)
+                        global_dispatch({
+                            type: 'SETTER_APPLICATION',
+                            global_new_data:{current_application:tdata},
+                        })
+
+
+                    }
+
+
+                }} />
+
+
+            <label htmlFor="file2input">
+                <Button
+                    component="span"
+                    variant="contained"
+                >
+                    Upload
+                    <input
+                        type="file"
+                        hidden
+                    />
+                </Button>
+            </label>
+
+        </> )
+    }
+
+
     const Display_Video_Uploaded = () => {
         return(
             <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
@@ -402,7 +443,9 @@ const Settings_Part_Background: React.FC = () => {
                                 autoPlay
                                 loop
 
-                                width="150" height="150" controls
+                                width="150"
+                                // height="150"
+                                controls
                         >
                             Your browser does not support the video tag.
                         </video>
@@ -416,12 +459,12 @@ const Settings_Part_Background: React.FC = () => {
 
         return(
             <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
-                {(global_props.current_application.background.background_data_image_value.length==0)?'no image selected'
+                {(global_props.current_application.background.background_data_image_value.length==0)?''
                     :
                     <img
                         style={{
-                            // width:400,
-                            height:100
+                            width:150,
+                            // height:100
                         }}
                         // width={'100%'}
                         // height={'100px'}
@@ -438,6 +481,7 @@ const Settings_Part_Background: React.FC = () => {
             </Box>
 
 
+            {/*=========== ROW CHECKBOXES */}
             <Box style={{border:"1px solid", borderColor:'blue'}}>
                 <Checkbox_All />
                 <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
@@ -447,45 +491,50 @@ const Settings_Part_Background: React.FC = () => {
                 </Box>
             </Box>
 
-            <Box style={{border:"1px solid", borderColor:'blue'}}>
+            {/*=========== ROW === COLOR === IMABE === VIDEO  */}
+            {/*<Box style={{border:"1px solid", borderColor:'blue'}}>*/}
 
 
-                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
-                    {/*== IIIIIIIII check_image_option*/}
-                    {/*<Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>*/}
+                <Box sx={{
+                    ...debub_border(null), ...{
+                        display: 'flex', flexDirection: 'row',
+                    }
+                }}>
 
-
-                    {/*</Box>*/}
-
+                    {/*=========== COL === IMABE ===  */}
                     <Box style={{
+                        ...debub_border('green'),
+                        flex:1,
                         zIndex:'99',
                         display:(state.display_box_image)?'flex':'none',
-                        flexDirection:'column'
+                        flexDirection:'column',
+                        alignItems:'center',
+                        padding:'10px',
+                        gap:'10px',
                     }}>
 
-                        <Box style={{
-                            zIndex:'99',
-                            display: (global_props.current_application.background.background_data_image_value.length==0) ? 'flex' : 'none',
-                        }}>
-                                <Upload_Image_Button/>
-                        </Box>
+                        {((global_props.current_application.background.background_data_image_value.length==0))
+                            ?
+                            <Upload_Image_Button/>
+                            :
+                            <No_Image_Button />
+                        }
 
 
                         <Display_Image_Uploaded />
-
                     </Box>
 
 
-
-                    {/*== VVVVVVVVVV check_video_option*/}
-                    {/*<Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>*/}
-
-                    {/*</Box> /!*VVVVVVVVVVVVV*!/*/}
-
-                    <Box id={'video_wrapper'} sx={{ display:(state.display_box_video)?'flex':'none',
+                    {/*=========== COL === VIDEO ===  */}
+                    <Box id={'video_wrapper'} sx={{
+                        ...debub_border('red'),
+                        flex:1,
+                        display:(state.display_box_video)?'flex':'none',
                         flexDirection:'column',
                         justifyContent:'center',
+                        alignItems:'center',
                         padding:'10px',
+                        gap:'10px',
                     }}>
 
                         {((global_props.current_application.background.background_data_video_value.length==0))
@@ -504,7 +553,7 @@ const Settings_Part_Background: React.FC = () => {
 
 
 
-            </Box>
+            {/*</Box>*/}
             <p>image {JSON.stringify(global_props.current_application.background.background_data_image_value.length)}</p>
             <p>video {JSON.stringify(global_props.current_application.background.background_data_video_value.length)}</p>
             <p>show  {JSON.stringify(global_props.current_application.background.background_media_video_show)}</p>
