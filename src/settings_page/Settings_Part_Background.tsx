@@ -19,6 +19,7 @@ import { FileError, FileRejection, useDropzone } from 'react-dropzone';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import DropFilesZone from "./DropFilesZone";
+import {log} from "util";
 
 
 const Settings_Part_Background: React.FC = () => {
@@ -121,16 +122,28 @@ const Settings_Part_Background: React.FC = () => {
 
     const [checked, setChecked] = React.useState([state.display_box_image, state.display_box_video]);
 
-    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange_parent = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked([event.target.checked, event.target.checked]);
+
         setState({
             ...state,
+            // react checkbox set checked trow onclick
             display_box_image:event.target.checked,
             display_box_video:event.target.checked,
         })
+        const tdata = global_props.current_application
+        tdata.background.background_media_image_show = event.target.checked
+        tdata.background.background_media_video_show = event.target.checked
+        console.log("=== SETTER_APPLICATION start ",tdata)
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
+
     };
 
-    const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange0 = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked([event.target.checked, checked[1]]);
         setState({
             ...state,
@@ -147,7 +160,7 @@ const Settings_Part_Background: React.FC = () => {
 
     };
 
-    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked([checked[0], event.target.checked]);
         setState({
             ...state,
@@ -172,7 +185,7 @@ const Settings_Part_Background: React.FC = () => {
           <FormControlLabel
               name="check_video_option"
               label="video"
-              control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+              control={<Checkbox checked={checked[1]} onChange={handleChange1} />}
           />
       )
     }
@@ -182,7 +195,7 @@ const Settings_Part_Background: React.FC = () => {
           <FormControlLabel
               name="check_image_option"
               label="image"
-              control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
+              control={<Checkbox checked={checked[0]} onChange={handleChange0} />}
           />
       )
     }
@@ -195,7 +208,7 @@ const Settings_Part_Background: React.FC = () => {
                   <Checkbox
                       checked={checked[0] && checked[1]}
                       indeterminate={checked[0] !== checked[1]}
-                      onChange={handleChange1}
+                      onChange={handleChange_parent}
                   />
               }
           />
@@ -302,15 +315,45 @@ const Settings_Part_Background: React.FC = () => {
         return(
             <>
 
-
                     <Card variant='outlined' color="info" sx={{border: '1px dashed', borderRadius:'10%', borderColor: 'green', opacity:'0.8', padding:'35px'}}>
-                    <Box style={{ display:'flex',
+                    <Box style={{
+                        zIndex:'99',
+                        display:'flex',
                         flexDirection: 'column',
                         justifyContent:'center',
                         alignItems:"center",
                     }}>
 
-                        <DropFilesZone />
+                        <DropFilesZone onDrop={(first_file:any)=>{
+                            console.log("=== ohDrop IMAGE ")
+
+                            const fileReader = new FileReader();
+                            fileReader.readAsDataURL(first_file);
+                            fileReader.onload = function (event:any) {
+                                const file_data = event.target.result
+                                console.log("=== base64 ",file_data)
+
+                                if(file_data) {
+
+                                    let image = document.createElement('img');
+                                    image.src = file_data;
+
+                                    const tdata = global_props.current_application
+                                    tdata.background.background_media_image_show = true
+                                    tdata.background.background_data_image_value_source_type = 'file'
+                                    tdata.background.background_data_image_value = file_data
+                                    console.log("=== tdata",tdata)
+                                    global_dispatch({
+                                        type: 'SETTER_APPLICATION',
+                                        global_new_data:{current_application:tdata},
+                                    })
+
+
+                                }
+                            };
+
+
+                        }} />
 
                     <p>or press</p>
 
@@ -414,12 +457,14 @@ const Settings_Part_Background: React.FC = () => {
 
                     {/*</Box>*/}
 
-                    <Box style={{ zIndex:'99',
+                    <Box style={{
+                        zIndex:'99',
                         display:(state.display_box_image)?'flex':'none',
                         flexDirection:'column'
                     }}>
 
                         <Box style={{
+                            zIndex:'99',
                             display: (global_props.current_application.background.background_data_image_value.length==0) ? 'flex' : 'none',
                         }}>
                                 <Upload_Image_Button/>
@@ -437,7 +482,7 @@ const Settings_Part_Background: React.FC = () => {
 
                     {/*</Box> /!*VVVVVVVVVVVVV*!/*/}
 
-                    <Box id={'image_wrapper'} sx={{ display:(state.display_box_video)?'flex':'none',
+                    <Box id={'video_wrapper'} sx={{ display:(state.display_box_video)?'flex':'none',
                         flexDirection:'column',
                         justifyContent:'center',
                         padding:'10px',

@@ -25,6 +25,7 @@ import { styled } from '@mui/material/styles';
 import Settings_Part_Background from "./Settings_Part_Background";
 import {globals_props_Reducer} from "../z_context_globals/globals_reducers";
 import {Globals_context} from "../context_globals_logrec/globals_context";
+import DropFilesZone from "./DropFilesZone";
 
 const Settings: React.FC = () => {
 
@@ -83,6 +84,7 @@ const Settings: React.FC = () => {
 
              }}
         >
+
             <Box id={'box1'}
                  sx={{
                      flexGrow: 1,
@@ -95,6 +97,8 @@ const Settings: React.FC = () => {
 
                 <Box id={'box2'}
                 >
+                    {/*<DropFilesZone id={'zone1'}/>*/}
+
                     <StyledTabs
 
                         // orientation='horizontal'

@@ -3,6 +3,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import {Alert} from "@mui/material";
+import {log} from "util";
 
 interface DropZoneProps {
     onDragStateChange?: (isDragActive: boolean) => void
@@ -13,7 +14,8 @@ interface DropZoneProps {
     onFilesDrop?: (files: File[]) => void
 }
 
-const DropZone = React.memo(
+const DropZoneMemo = React.memo(
+
     (props: React.PropsWithChildren<DropZoneProps>) => {
         const {
             onDragStateChange,
@@ -44,7 +46,8 @@ const DropZone = React.memo(
         const handleDragIn = React.useCallback(
 
             (event:any) => {
-                console.log("==  handleDragIn ",event)
+                console.log("==  handleDragIn ")
+                // + component_id,event)
                 event.preventDefault()
                 event.stopPropagation()
                 onDragIn?.()
@@ -57,8 +60,12 @@ const DropZone = React.memo(
         )
 
         // Create handler for dragleave event:
+
         const handleDragOut = React.useCallback(
             (event:any) => {
+
+                console.log("=== handleDragOut")
+
                 event.preventDefault()
                 event.stopPropagation()
                 onDragOut?.()
@@ -136,9 +143,10 @@ const DropZone = React.memo(
 )
 
 
-const DropFilesZone = React.memo(() => {
+const DropFilesZone = React.memo((props:any) => {
 
 // Create "active" state for dropzone:
+    const [component_id, set_component_id] = React.useState(false)
     const [isDropActive, setIsDropActive] = React.useState(false)
     // Create state for dropped files:
     const [files, setFiles] = React.useState<File[]>([])
@@ -151,6 +159,10 @@ const DropFilesZone = React.memo(() => {
     // Create handler for dropzone's onFilesDrop:
     const onFilesDrop = React.useCallback((files: File[]) => {
         setFiles(files)
+        console.log("=== props ",props)
+        if(props.onDrop && files && files[0]){
+            props.onDrop( files[0] )
+        }
     }, [])
 
 
@@ -172,13 +184,19 @@ const DropFilesZone = React.memo(() => {
     )
 
     return (
-        <div style={{zIndex:99}}
+        <div id={props.id?props.id:'zone_'+(Math.random()*1000).toString()} style={{zIndex:99}}
             className={classNames('dropZoneWrapper', {
                 'dropZoneActive': isDropActive,
             })}
         >
             {/* Render the dropzone */}
-            <DropZone onDragStateChange={onDragStateChange} onFilesDrop={onFilesDrop}>
+            <DropZoneMemo
+                onDragStateChange={onDragStateChange}
+                onFilesDrop={onFilesDrop}
+                // onDragOut={()=>{
+                //     console.log("+++ onDragOut")}
+                // }
+            >
                     <h5>Drop your files here</h5>
 
                     {files.length === 0 ? (
@@ -189,7 +207,7 @@ const DropFilesZone = React.memo(() => {
 
                 {/* Render the file list */}
                 <FileList files={files} />
-            </DropZone>
+            </DropZoneMemo>
 
         </div>
     )

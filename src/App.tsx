@@ -75,43 +75,6 @@ const App: React.FC = () => {
         {
 
             data_background_video=global_props.current_application.background.background_data_video_value
-            // data_background_video='https://img.freepik.com/free-photo/feeling-free-woman-hilltop_23-2148150137.jpg?w=1380&t=st=1676388878~exp=1676389478~hmac=20c92bd22e051a2a714173e7ea37739adef6de1ba6380396498875e9f3035d41'
-            // console.log("=== data_background_video START",Date)
-
-            // // data:video/mp4;base64,
-            // const b64toBlob = (b64Data:any, contentType='', sliceSize=512) => {
-            //     const byteCharacters = window.atob(b64Data);
-            //     const byteArrays = [];
-            //
-            //     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            //         const slice = byteCharacters.slice(offset, offset + sliceSize);
-            //
-            //         const byteNumbers = new Array(slice.length);
-            //         for (let i = 0; i < slice.length; i++) {
-            //             byteNumbers[i] = slice.charCodeAt(i);
-            //         }
-            //
-            //         const byteArray = new Uint8Array(byteNumbers);
-            //         byteArrays.push(byteArray);
-            //     }
-            //
-            //     const blob = new Blob(byteArrays, {type: contentType});
-            //     return blob;
-            // }
-            //
-            //
-            // const contentType = 'video/mp4';
-            // const b64Data = data_background_video.replace('data:video/mp4;base64,','')
-            //
-            // const blob = b64toBlob(b64Data, contentType);
-            //
-            // // const blobUrl = URL.createObjectURL(blob);
-            // // const img = document.createElement('video');
-            // // img.src = blobUrl;
-            // // document.body.appendChild(img);
-            // data_background_video = blob
-            // // console.log("=== data_background_video BLOB",data_background_video)
-            //
 
             console.log("=== data_background_video BLOB",data_background_video)
 
@@ -168,11 +131,11 @@ const App: React.FC = () => {
             <div
                 style={{
                     zIndex:6,
+                    opacity:'0.5',
 
                     background: 'linear-gradient(85deg, rgba(34,193,195,1) 0%, rgba(179,191,111,1) 37%, rgba(177,116,190,1) 80%, rgba(253,45,219,1) 99%)',
                     // backgroundColor:'green',
                     position: 'absolute',
-                    opacity:'0.5',
                     top: '0',
                     left: '0',
                     height:'100%',
@@ -206,19 +169,23 @@ const App: React.FC = () => {
             }
 
             {(!data_background_video)?'no video...':
+
+
                 <video  id={'#video0'}
+
+                        autoPlay={true}
                         style={{
+                            objectFit: 'cover',
                             zIndex:10,
                             opacity:'0.3',
-                            objectFit: 'cover',
+
                             position: 'absolute',
                             top: '0',
                             left: '0',
                             height:'100%',
                             width:'100%',
-                        }}
 
-                        autoPlay={true}
+                        }}
 
                         loop
                         // src={'https://joy1.videvo.net/videvo_files/video/free/video0467/large_watermarked/_import_615435000f6eb2.81789495_preview.mp4'}
@@ -257,7 +224,7 @@ const App: React.FC = () => {
 
             {/*<GoogleSignIn />*/}
 
-            {/*<DropFilesZone/>*/}
+            {/*<DropFilesZone id={'zone1'}/>*/}
 
             <AppWorkPage/>
 
