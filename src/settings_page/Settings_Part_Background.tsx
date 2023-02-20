@@ -325,7 +325,7 @@ const Settings_Part_Background: React.FC = () => {
                     }}>
 
                         <DropFilesZone onDrop={(first_file:any)=>{
-                            console.log("=== ohDrop IMAGE ")
+                            console.log("=== ohDrop IMAGE  ")
 
                             const fileReader = new FileReader();
                             fileReader.readAsDataURL(first_file);
