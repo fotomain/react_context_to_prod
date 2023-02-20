@@ -28,7 +28,7 @@ initial_setings.current_application.title.mode_position='left' // left middle ri
 initial_setings.current_application.background={}
 
 
-// TODO COLOR background_color_show
+// TODO background_color_show background_color_show
 //=== DOC https://angrytools.com/gradient/
 initial_setings.current_application.background.background_color_show=false // default=image, color, video
 initial_setings.current_application.background.background_data_color_value_source_type='' //still gradient

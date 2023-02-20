@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {Globals_context} from "../context_globals_logrec/globals_context";
-import {Alert, Box, Button, Card} from "@mui/material";
+import {Alert, Box, Button, Card, FormLabel, Radio, RadioGroup} from "@mui/material";
 
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
@@ -60,8 +60,11 @@ const Settings_Part_Background: React.FC = () => {
     const [state, setState] = React.useState({
         header1:'',
         file1:'',
+        'background_data_color_value_source_type':  global_props.current_application.background_data_color_value_source_type,
+        //TODO FROM GLOBALS
         display_box_image:false,
         display_box_video:false,
+        display_box_color:false,
     });
 
     const getFileHeader = (file:any) => {
@@ -147,10 +150,14 @@ const Settings_Part_Background: React.FC = () => {
     };
 
 
-    const [checked, setChecked] = React.useState([state.display_box_image, state.display_box_video]);
+    const [checked, setChecked] = React.useState([
+        state.display_box_image,
+        state.display_box_video ,
+        state.display_box_color
+    ]);
 
     const handleChange_parent = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([event.target.checked, event.target.checked]);
+        setChecked([event.target.checked, event.target.checked, event.target.checked]);
 
         setState({
             ...state,
@@ -170,12 +177,30 @@ const Settings_Part_Background: React.FC = () => {
 
     };
 
-    const handleChange0 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([event.target.checked, checked[1]]);
+    const handleChange_Color = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([checked[0], checked[1], event.target.checked]);
+        setState({
+            ...state,
+            display_box_color:event.target.checked,
+        })
+
+        const tdata = global_props.current_application
+        tdata.background.background_color_show = event.target.checked
+        console.log("=== SETTER_APPLICATION start ",tdata)
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
+
+    };
+
+
+    const handleChange_Image = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([event.target.checked, checked[1], checked[2]]);
         setState({
             ...state,
             display_box_image:event.target.checked,
-            display_box_video:checked[1],
         })
         const tdata = global_props.current_application
         tdata.background.background_media_image_show = event.target.checked
@@ -187,11 +212,10 @@ const Settings_Part_Background: React.FC = () => {
 
     };
 
-    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([checked[0], event.target.checked]);
+    const handleChange_Video = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked([checked[0], event.target.checked,checked[2]]);
         setState({
             ...state,
-            display_box_image:checked[0],
             display_box_video:event.target.checked,
         })
 
@@ -207,40 +231,53 @@ const Settings_Part_Background: React.FC = () => {
     };
 
 
-    const Checkbox_Video = () => {
+    const Checkbox_All = () => {
+        return(
+            <FormControlLabel
+                label="use all options"
+                control={
+                    <Checkbox
+                        checked={checked[0] && checked[1]}
+                        indeterminate={checked[0] !== checked[1]}
+                        onChange={handleChange_parent}
+                    />
+                }
+            />
+        )
+    }
+
+    const Checkbox_Color = () => {
       return(
           <FormControlLabel
-              name="check_video_option"
-              label="video"
-              control={<Checkbox checked={checked[1]} onChange={handleChange1} />}
+              name="check_color_option"
+              label="color"
+              control={<Checkbox checked={checked[2]} onChange={handleChange_Color} />}
           />
       )
     }
+
 
     const Checkbox_Image = () => {
       return(
           <FormControlLabel
               name="check_image_option"
               label="image"
-              control={<Checkbox checked={checked[0]} onChange={handleChange0} />}
+              control={<Checkbox checked={checked[0]} onChange={handleChange_Image} />}
           />
       )
     }
 
-    const Checkbox_All = () => {
-      return(
-          <FormControlLabel
-              label="use all options"
-              control={
-                  <Checkbox
-                      checked={checked[0] && checked[1]}
-                      indeterminate={checked[0] !== checked[1]}
-                      onChange={handleChange_parent}
-                  />
-              }
-          />
-      )
+    const Checkbox_Video = () => {
+        return(
+            <FormControlLabel
+                name="check_video_option"
+                label="video"
+                control={<Checkbox checked={checked[1]} onChange={handleChange_Video} />}
+            />
+        )
     }
+
+
 
     const onDrop = (acceptedFiles:any) => {
         console.log("=== acceptedFiles ",acceptedFiles)
@@ -474,6 +511,29 @@ const Settings_Part_Background: React.FC = () => {
         )
     }
 
+    function onChange_left_right(event:any) {
+        console.log("=== onChange_left_right")
+        let t_ev_type = (event.target.value).trim()
+        console.log(t_ev_type)
+        if(t_ev_type=="gradient"){
+            console.log('=== go left' )
+            setState({...state, ['background_data_color_value_source_type']: 'still'})
+        }
+        else{
+            console.log('=== go right' )
+            setState({...state, ['background_data_color_value_source_type']: 'gradient'})
+        }
+
+        const tdata = global_props.current_application
+        tdata.title.mode_position = t_ev_type
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
+    }
+
+
     return (
         <>
             <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
@@ -485,13 +545,15 @@ const Settings_Part_Background: React.FC = () => {
             <Box style={{border:"1px solid", borderColor:'blue'}}>
                 <Checkbox_All />
                 <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+
+                    <Checkbox_Color/>
                     <Checkbox_Image/>
                     <Checkbox_Video />
 
                 </Box>
             </Box>
 
-            {/*=========== ROW === COLOR === IMABE === VIDEO  */}
+            {/*=========== ROW === COLOR === IMAGE === VIDEO  */}
             {/*<Box style={{border:"1px solid", borderColor:'blue'}}>*/}
 
 
@@ -501,7 +563,59 @@ const Settings_Part_Background: React.FC = () => {
                     }
                 }}>
 
-                    {/*=========== COL === IMABE ===  */}
+                    {/*=========== COL === COLOR ===  */}
+                    <Box style={{
+                        ...debub_border('green'),
+                        flex:1,
+                        zIndex:'99',
+                        display:(state.display_box_color)?'flex':'none',
+                        flexDirection:'column',
+                        alignItems:'center',
+                        padding:'10px',
+                        gap:'10px',
+                    }}>
+
+
+                        <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
+                                    onChange={onChange_left_right}
+
+
+                                    value={state['background_data_color_value_source_type']}
+                        >
+                            <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
+                            <FormControlLabel labelPlacement="end" value="still"
+                                              control={
+                                                  <Radio
+                                                      sx={{
+                                                          '&, &.Mui-checked': {
+                                                              color: 'primary',
+                                                          },
+                                                      }}
+                                                  />}
+                                              label="still"
+                            />
+                            <FormControlLabel labelPlacement="end" value="gradient"
+                                              control={
+                                                  <Radio
+                                                      sx={{
+                                                          '&, &.Mui-checked': {
+                                                              color: 'primary',
+                                                          },
+                                                      }}
+                                                  />}
+
+                                              label="gradient" />
+                            {/*<FormControlLabel*/}
+                            {/*    value="disabled"*/}
+                            {/*    disabled*/}
+                            {/*    control={<Radio />}*/}
+                            {/*    label="other"/>*/}
+                        </RadioGroup>
+
+                    </Box>
+
+
+                    {/*=========== COL === IMAGE ===  */}
                     <Box style={{
                         ...debub_border('green'),
                         flex:1,
