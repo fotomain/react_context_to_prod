@@ -39,12 +39,13 @@ import Test_Globals from "./z_context_globals/Test_Globals";
 
 //start_globals_from_logrec
 
-import { Globals_Provider } from "./context_globals_logrec/context";
-import LogrecList from "./context_globals_logrec/LogrecList";
-import LogrecForm from "./context_globals_logrec/LogrecForm";
+import { Globals_Provider } from "./context_globals_logrec/globals_context";
+import LogrecList from "./context_work_logrec/LogrecList";
+import LogrecForm from "./context_work_logrec/LogrecForm";
 
 import './App.css'
 import Settings from "./settings_page/Settings";
+import LogWork from "./context_work_logrec/LogWork";
 
 setupIonicReact();
 
@@ -74,19 +75,10 @@ const AppWorkPage: React.FC = () => {
                 <IonContent id={'comp_settings'}
                             style={{zIndex:20}}
                 >
+                    <Settings />
 
+                    {/*<LogWork />*/}
                     {/*<Globals_Provider>*/}
-                        <div className="App"
-                             style={{zIndex:20}}
-                        >
-                            <LogrecForm/>
-                            <LogrecList/>
-                            <div className="rules">
-                                <p>Double click - complete log </p>
-                                <p>X - delete log</p>
-                            </div>
-                            <Settings />
-                        </div>
                     {/*</Globals_Provider>*/}
 
 
@@ -105,7 +97,6 @@ const AppWorkPage: React.FC = () => {
 
                     {/*globals start*/}
                     {/*<Test_Globals/>*/}
-
 
 
                 </IonContent>

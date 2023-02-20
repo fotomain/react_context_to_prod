@@ -24,11 +24,11 @@ import {a11yProps, TabPanel} from "./MUITools";
 import { styled } from '@mui/material/styles';
 import Settings_Part_Background from "./Settings_Part_Background";
 import {globals_props_Reducer} from "../z_context_globals/globals_reducers";
-import {Context} from "../context_globals_logrec/context";
+import {Globals_context} from "../context_globals_logrec/globals_context";
 
 const Settings: React.FC = () => {
 
-    const { global_props, global_dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [value, setValue] = React.useState(0);
 
@@ -88,9 +88,11 @@ const Settings: React.FC = () => {
                      flexGrow: 1,
                      display: 'flex',
                      bgcolor: 'background.paper',
-                     height: 500,
+                     height: 600,
                  }}
             >
+
+
                 <Box id={'box2'}
                 >
                     <StyledTabs
@@ -145,7 +147,7 @@ const Settings: React.FC = () => {
                 </TabPanel>
             </Box>
 
-            <p>global_props = {JSON.stringify(global_props)}</p>
+
 
         </div>
 

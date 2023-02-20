@@ -1,7 +1,7 @@
 
 
 import * as React from "react";
-import userReducer from "./reducer";
+import userReducer from "./globals_reducer";
 import {TGloabal_context} from "./globals_types";
 import {initial_setings} from "./globals_initial_setings";
 import {useEffect, useState} from "react";
@@ -18,7 +18,7 @@ const initial_logrecs = [
 // let initial_user = {email:'aa'}
 // initial_user.email  = 'bb';
 
-export const Context = React.createContext({} as TGloabal_context);
+export const Globals_context = React.createContext({} as TGloabal_context);
 
 interface IProps {
     children?: React.ReactChild;
@@ -38,5 +38,5 @@ export function Globals_Provider(props: IProps) {
 
 
     const value = { global_props, global_dispatch };
-    return <Context.Provider value={value}>{props.children}</Context.Provider>;
+    return <Globals_context.Provider value={value}>{props.children}</Globals_context.Provider>;
 }

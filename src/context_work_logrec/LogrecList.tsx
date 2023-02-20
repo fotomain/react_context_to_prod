@@ -1,9 +1,9 @@
 // codesandbox typescript react context reducer logrec app
 import * as React from "react";
 
-import { Context } from "./context";
+import { Globals_context } from "../context_globals_logrec/globals_context";
 const LogrecList: React.FC<{}> = () => {
-    const { global_props, global_dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Globals_context);
     return (
         <div className="gridItems">
 

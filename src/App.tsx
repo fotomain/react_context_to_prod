@@ -2,7 +2,7 @@
 
 
 // git remote add origin https://github.com/fotomain/vit_ionic_play1.git
-// ionic build
+// ionic build --confirm --no-interactive
 // ionic build --prod; ionic cap copy --prod; ionic serve
 // npm i swiper
 //=== DOC COOL https://thetechbee.medium.com/creating-a-slide-using-swiper-js-in-ionic-react-in-5-steps-2022-mobile-app-development-for-52f4cb80d2ce
@@ -44,9 +44,9 @@ import Test_Globals from "./z_context_globals/Test_Globals";
 
 //start_globals_from_logrec
 
-import {Context, Globals_Provider} from "./context_globals_logrec/context";
-import LogrecList from "./context_globals_logrec/LogrecList";
-import LogrecForm from "./context_globals_logrec/LogrecForm";
+import {Globals_context, Globals_Provider} from "./context_globals_logrec/globals_context";
+import LogrecList from "./context_work_logrec/LogrecList";
+import LogrecForm from "./context_work_logrec/LogrecForm";
 
 import './App.css'
 import Settings from "./settings_page/Settings";
@@ -60,7 +60,7 @@ setupIonicReact();
 
 const App: React.FC = () => {
 
-    const { global_props,global_dispatch } = React.useContext(Context);
+    const { global_props,global_dispatch } = React.useContext(Globals_context);
 
     var data_background_color:any =  ''
 
@@ -255,11 +255,12 @@ const App: React.FC = () => {
             {/*</video>*/}
             {/*}*/}
 
-            <GoogleSignIn />
+            {/*<GoogleSignIn />*/}
 
-            <DropFilesZone/>
+            {/*<DropFilesZone/>*/}
 
             <AppWorkPage/>
+
         </div>
 
     )

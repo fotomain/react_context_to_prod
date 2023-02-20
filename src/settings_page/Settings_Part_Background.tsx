@@ -8,7 +8,7 @@
 
 
 import * as React from 'react';
-import {Context} from "../context_globals_logrec/context";
+import {Globals_context} from "../context_globals_logrec/globals_context";
 import {Alert, Box, Button, Card} from "@mui/material";
 
 import { Database, Storage } from '@ionic/storage';
@@ -23,7 +23,7 @@ import DropFilesZone from "./DropFilesZone";
 
 const Settings_Part_Background: React.FC = () => {
 
-    const { global_props, global_dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [file2_loading_video, set_file2_loading_video] = useState(false);
     const [file_data_video, set_file_data_video] = useState('');
@@ -151,6 +151,16 @@ const Settings_Part_Background: React.FC = () => {
     };
 
 
+    const Checkbox_Video = () => {
+      return(
+          <FormControlLabel
+              name="check_video_option"
+              label="video"
+              control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
+          />
+      )
+    }
+
     const Checkbox_Image = () => {
       return(
           <FormControlLabel
@@ -179,11 +189,76 @@ const Settings_Part_Background: React.FC = () => {
         maxSize: 50000 * 1024, // 300KB
     });
 
+    const Upload_Video_Button = () => {
+        return( <>
+        <input
+            style={{display: 'none'}}
+            // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
+            accept="video/mp4,video/x-m4v"
+            type="file"
+            id="file2input"
+
+            onChange={(event:any)=>{
+                let file = event.target.files[0];
+
+                // let blobURL = URL.createObjectURL(file);
+                // console.log("=== blobURL",blobURL)
+
+                set_file2_loading_video(true)
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+                fileReader.onload = function (event:any) {
+                    const file_data = event.target.result
+                    console.log("=== base64 ",file_data)
+
+
+
+                    // const el = document.getElementById("#video1") as HTMLVideoElement
+                    set_file2_loading_video(false)
+                    set_file_data_video(file_data)
+                    // if (el) el.src = file_data;
+
+                    console.log("=== src = file_data ")
+
+                    const tdata = global_props.current_application
+                    tdata.background.background_media_video_show = true
+                    tdata.background.background_data_video_value_source_type = 'file'
+                    tdata.background.background_data_video_value = file_data
+                    console.log("=== tdata",tdata)
+                    console.log("=== SETTER_APPLICATION start ",tdata)
+                    global_dispatch({
+                        type: 'SETTER_APPLICATION',
+                        global_new_data:{current_application:tdata},
+                    })
+
+
+                }
+
+
+            }} />
+
+
+        <label htmlFor="file2input">
+            <Button
+                component="span"
+                variant="contained"
+            >
+                Upload video
+                <input
+                    type="file"
+                    hidden
+                />
+            </Button>
+        </label>
+
+        </> )
+    }
+
     const Upload_Image_Button = () => {
         return(
-            <Box style={{ zIndex:'99' }}>
+            <>
 
-                <Box style={{  display:(state.display_box_image)?'flex':'none' }}>
+                <Box >
 
                     <Card variant='outlined' color="info" sx={{border: '1px dashed', borderRadius:'10%', borderColor: 'green', opacity:'0.8', padding:'35px'}}>
                     <Box style={{ display:'flex',
@@ -241,7 +316,7 @@ const Settings_Part_Background: React.FC = () => {
                         />}
                 </Box>
 
-            </Box>
+            </>
 
         )
 
@@ -265,89 +340,27 @@ const Settings_Part_Background: React.FC = () => {
                     }
                 />
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
                     {/*== IIIIIIIII check_image_option*/}
                     <Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
 
                         <Checkbox_Image/>
 
                     </Box>
-                    <Box>
+
+                    <Box style={{ zIndex:'99', display:(state.display_box_image)?'flex':'none' }}>
+
                         <Upload_Image_Button/>
+
                     </Box>
 
                     {/*== VVVVVVVVVV check_video_option*/}
                     <Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
 
-                        <FormControlLabel
-                            name="check_video_option"
-                            label="video"
-                            control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-                        />
-
+                        <Checkbox_Video />
 
                         <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
-
-                            <input
-                                style={{display: 'none'}}
-                                // https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept
-                                accept="video/mp4,video/x-m4v"
-                                type="file"
-                                id="file2input"
-
-                                onChange={(event:any)=>{
-                                    let file = event.target.files[0];
-
-                                    // let blobURL = URL.createObjectURL(file);
-                                    // console.log("=== blobURL",blobURL)
-
-                                    set_file2_loading_video(true)
-                                    const fileReader = new FileReader();
-                                    fileReader.readAsDataURL(file);
-                                    fileReader.onload = function (event:any) {
-                                        const file_data = event.target.result
-                                        console.log("=== base64 ",file_data)
-
-
-
-                                        // const el = document.getElementById("#video1") as HTMLVideoElement
-                                        set_file2_loading_video(false)
-                                        set_file_data_video(file_data)
-                                        // if (el) el.src = file_data;
-
-                                        console.log("=== src = file_data ")
-
-                                        const tdata = global_props.current_application
-                                        tdata.background.background_media_video_show = true
-                                        tdata.background.background_data_video_value_source_type = 'file'
-                                        tdata.background.background_data_video_value = file_data
-                                        console.log("=== tdata",tdata)
-                                        console.log("=== SETTER_APPLICATION start ",tdata)
-                                        global_dispatch({
-                                            type: 'SETTER_APPLICATION',
-                                            global_new_data:{current_application:tdata},
-                                        })
-
-
-                                    }
-
-
-                                }} />
-
-
-                            <label htmlFor="file2input">
-                                <Button
-                                    component="span"
-                                    variant="contained"
-                                >
-                                    Upload video
-                                    <input
-                                        type="file"
-                                        hidden
-                                    />
-                                </Button>
-                            </label>
-
+                            <Upload_Video_Button />
                         </Box> {/*video*/}
 
                     </Box> {/*VVVVVVVVVVVVV*/}

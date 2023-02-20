@@ -4,7 +4,7 @@ import AppWorkPage from './AppWorkPage';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import App from "./App";
-import {Globals_Provider} from "./context_globals_logrec/context";
+import {Globals_Provider} from "./context_globals_logrec/globals_context";
 import {Database, Storage} from "@ionic/storage";
 
 const container = document.getElementById('root');

@@ -15,18 +15,18 @@ import {
     FormGroup,
     FormLabel, Radio,
     RadioGroup,
-    Switch,
+    Switch, TextareaAutosize,
     TextField
 } from "@mui/material";
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
 import {a11yProps, TabPanel} from "./MUITools";
-import {Context} from "../context_globals_logrec/context";
+import {Globals_context} from "../context_globals_logrec/globals_context";
 import {useState} from "react";
 import Settings_Part_Background from "./Settings_Part_Background";
 
 const Settings_Part_Application: React.FC = () => {
 
-    const { global_props, global_dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [tab_value, set_tab_value] = React.useState(0);
 
@@ -92,16 +92,38 @@ const Settings_Part_Application: React.FC = () => {
 <div>
       <Box>
 
-          <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
-          <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
 
           <Tabs value={tab_value} onChange={onChangeTab} aria-label="icon label tabs example">
               <Tab icon={<FavoriteIcon />} label="Title"  {...a11yProps(0)} />
               <Tab icon={<WallpaperIcon />} label="Bacgground"  {...a11yProps(1)} />
               <Tab icon={<PersonPinIcon />} label="About"  {...a11yProps(2)}  />
+              <Tab icon={<PersonPinIcon />} label="Globals"  {...a11yProps(3)}  />
           </Tabs>
 
           {/*id={'panel1'}*/}
+          <TabPanel value={tab_value} index={3}  >
+              <Box id={'box_state'} sx={{marginLeft:'24px' ,
+                  marginTop:'24px',
+                  display:'flex',
+                  flexDirection:"row",
+                  flexWrap:"wrap",
+
+              }} >
+              <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
+              <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
+                  <Box sx={{p:'24px'}}>
+
+                      <TextareaAutosize
+                          aria-label="empty textarea"
+                          placeholder="Empty"
+                          style={{ width: 500 }}
+                          value={"global_props = " + JSON.stringify(global_props) }
+                      />
+
+                  </Box>
+              </Box>
+
+          </TabPanel>
           <TabPanel value={tab_value} index={0}  >
               <Box  sx={{marginLeft:'24px' , marginTop:'24px' }} >
 

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Context } from "./context";
+import { Globals_context } from "../context_globals_logrec/globals_context";
 
 export default function() {
     const [logrec, setLogrec] = React.useState("");
-    const { global_props, global_dispatch } = React.useContext(Context);
+    const { global_props, global_dispatch } = React.useContext(Globals_context);
     let handleSubmit = (event: React.MouseEvent<HTMLFormElement>): void => {
         event.preventDefault();
         global_dispatch({ type: "ADD_TODO",
