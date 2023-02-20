@@ -26,13 +26,12 @@ const Settings_Part_Background: React.FC = () => {
     const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [file2_loading_video, set_file2_loading_video] = useState(false);
-    const [file_data_video, set_file_data_video] = useState('');
+    const [file_data_video, set_file_data_video] = useState(global_props.current_application.background.background_data_video_value);
 
 
     const [state, setState] = React.useState({
         header1:'',
         file1:'',
-        image_base64:'',
         display_box_image:false,
         display_box_video:false,
     });
@@ -68,7 +67,6 @@ const Settings_Part_Background: React.FC = () => {
             console.log("=== base64 ",file_data)
 
             if(file_data) {
-                setState({...state, ['image_base64']: file_data})
 
                 let image = document.createElement('img');
                 image.src = file_data;
@@ -139,6 +137,14 @@ const Settings_Part_Background: React.FC = () => {
             display_box_image:event.target.checked,
             display_box_video:checked[1],
         })
+        const tdata = global_props.current_application
+        tdata.background.background_media_image_show = event.target.checked
+        console.log("=== SETTER_APPLICATION start ",tdata)
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
     };
 
     const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,6 +154,16 @@ const Settings_Part_Background: React.FC = () => {
             display_box_image:checked[0],
             display_box_video:event.target.checked,
         })
+
+        const tdata = global_props.current_application
+        tdata.background.background_media_video_show = event.target.checked
+        console.log("=== SETTER_APPLICATION start ",tdata)
+        global_dispatch({
+            type: 'SETTER_APPLICATION',
+            global_new_data:{current_application:tdata},
+        })
+
+
     };
 
 
@@ -203,6 +219,19 @@ const Settings_Part_Background: React.FC = () => {
         // maxSize: 300 * 1024, // 300KB
         maxSize: 50000 * 1024, // 300KB
     });
+
+    const No_Video_Button = () => {
+        return (
+            <Button
+                variant="contained"
+                onClick={()=>{
+
+                }}
+            >
+                No video
+            </Button>
+        )
+    }
 
     const Upload_Video_Button = () => {
         return( <>
@@ -273,7 +302,6 @@ const Settings_Part_Background: React.FC = () => {
         return(
             <>
 
-                <Box >
 
                     <Card variant='outlined' color="info" sx={{border: '1px dashed', borderRadius:'10%', borderColor: 'green', opacity:'0.8', padding:'35px'}}>
                     <Box style={{ display:'flex',
@@ -315,10 +343,6 @@ const Settings_Part_Background: React.FC = () => {
                     </Box>
                     </Card>
 
-                </Box>
-
-
-
             </>
 
         )
@@ -329,12 +353,9 @@ const Settings_Part_Background: React.FC = () => {
         return(
             <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
 
-                <Box sx={{ display: (checked[1])?'flex':'none', flexDirection: 'column',  }}>
-
-                    {(file_data_video.length==0)?'no video selected':
                         <video  id={'#video1'}
 
-                                src={file_data_video}
+                                src={global_props.current_application.background.background_data_video_value}
                                 autoPlay
                                 loop
 
@@ -342,8 +363,6 @@ const Settings_Part_Background: React.FC = () => {
                         >
                             Your browser does not support the video tag.
                         </video>
-                    }
-                </Box>
 
             </Box>
 
@@ -354,7 +373,7 @@ const Settings_Part_Background: React.FC = () => {
 
         return(
             <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
-                {(state.image_base64.length==0)?'no image selected'
+                {(global_props.current_application.background.background_data_image_value.length==0)?'no image selected'
                     :
                     <img
                         style={{
@@ -363,7 +382,7 @@ const Settings_Part_Background: React.FC = () => {
                         }}
                         // width={'100%'}
                         // height={'100px'}
-                        src={state.image_base64}
+                        src={global_props.current_application.background.background_data_image_value}
                     />}
             </Box>
         )
@@ -395,30 +414,55 @@ const Settings_Part_Background: React.FC = () => {
 
                     {/*</Box>*/}
 
-                    <Box style={{ zIndex:'99', display:(state.display_box_image)?'flex':'none' }}>
+                    <Box style={{ zIndex:'99',
+                        display:(state.display_box_image)?'flex':'none',
+                        flexDirection:'column'
+                    }}>
 
-                        <Upload_Image_Button/>
+                        <Box style={{
+                            display: (global_props.current_application.background.background_data_image_value.length==0) ? 'flex' : 'none',
+                        }}>
+                                <Upload_Image_Button/>
+                        </Box>
+
+
+                        <Display_Image_Uploaded />
 
                     </Box>
 
-                    <Display_Image_Uploaded />
+
 
                     {/*== VVVVVVVVVV check_video_option*/}
                     {/*<Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>*/}
 
                     {/*</Box> /!*VVVVVVVVVVVVV*!/*/}
 
-                    <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
-                        <Upload_Video_Button />
-                    </Box> {/*video*/}
+                    <Box id={'image_wrapper'} sx={{ display:(state.display_box_video)?'flex':'none',
+                        flexDirection:'column',
+                        justifyContent:'center',
+                        padding:'10px',
+                    }}>
 
-                    <Display_Video_Uploaded />
+                        {((global_props.current_application.background.background_data_video_value.length==0))
+                            ?<Upload_Video_Button />
+                            :<No_Video_Button />
+                        }
+
+                        <Box style={{ display: (global_props.current_application.background.background_data_video_value.length!=0)?'flex':'none', flexDirection: 'column',  }}>
+
+                            <Display_Video_Uploaded />
+
+                        </Box>
+                    </Box> {/*video*/}
 
                 </Box>
 
 
 
             </Box>
+            <p>image {JSON.stringify(global_props.current_application.background.background_data_image_value.length)}</p>
+            <p>video {JSON.stringify(global_props.current_application.background.background_data_video_value.length)}</p>
+            <p>show  {JSON.stringify(global_props.current_application.background.background_media_video_show)}</p>
             <p>{JSON.stringify(checked)}</p>
         </>
 
