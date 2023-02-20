@@ -187,7 +187,7 @@ const App: React.FC = () => {
                 <div
                     style={{
                         zIndex:5,
-                        // opacity:'0.3',
+                        opacity:'0.3',
                         backgroundImage: 'url(' + data_background_image + ')' ,
                         backgroundRepeat: "no-repeat",
 
@@ -209,7 +209,7 @@ const App: React.FC = () => {
                 <video  id={'#video0'}
                         style={{
                             zIndex:10,
-                            // opacity:'0.3',
+                            opacity:'0.3',
                             objectFit: 'cover',
                             position: 'absolute',
                             top: '0',

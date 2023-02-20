@@ -171,6 +171,21 @@ const Settings_Part_Background: React.FC = () => {
       )
     }
 
+    const Checkbox_All = () => {
+      return(
+          <FormControlLabel
+              label="use all options"
+              control={
+                  <Checkbox
+                      checked={checked[0] && checked[1]}
+                      indeterminate={checked[0] !== checked[1]}
+                      onChange={handleChange1}
+                  />
+              }
+          />
+      )
+    }
+
     const onDrop = (acceptedFiles:any) => {
         console.log("=== acceptedFiles ",acceptedFiles)
         getFile(acceptedFiles[0])
@@ -302,19 +317,7 @@ const Settings_Part_Background: React.FC = () => {
 
                 </Box>
 
-                <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
-                    {(state.image_base64.length==0)?'no image selected'
-                        :
-                        <img
-                            style={{
-                                // width:400,
-                                height:100
-                            }}
-                            // width={'100%'}
-                            // height={'100px'}
-                            src={state.image_base64}
-                        />}
-                </Box>
+
 
             </>
 
@@ -322,31 +325,75 @@ const Settings_Part_Background: React.FC = () => {
 
     }
 
-    return (
+    const Display_Video_Uploaded = () => {
+        return(
+            <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
 
-        <Box>
+                <Box sx={{ display: (checked[1])?'flex':'none', flexDirection: 'column',  }}>
 
-            <Box>
-                <p>{JSON.stringify(checked)}</p>
-                <p>You can choose options for the background</p>
-                <FormControlLabel
-                    label="use all options"
-                    control={
-                        <Checkbox
-                            checked={checked[0] && checked[1]}
-                            indeterminate={checked[0] !== checked[1]}
-                            onChange={handleChange1}
-                        />
+                    {(file_data_video.length==0)?'no video selected':
+                        <video  id={'#video1'}
+
+                                src={file_data_video}
+                                autoPlay
+                                loop
+
+                                width="150" height="150" controls
+                        >
+                            Your browser does not support the video tag.
+                        </video>
                     }
-                />
+                </Box>
+
+            </Box>
+
+        )
+    }
+
+    const Display_Image_Uploaded = () => {
+
+        return(
+            <Box sx={{ display: (checked[0])?'flex':'none', flexDirection: 'column',  }}>
+                {(state.image_base64.length==0)?'no image selected'
+                    :
+                    <img
+                        style={{
+                            // width:400,
+                            height:100
+                        }}
+                        // width={'100%'}
+                        // height={'100px'}
+                        src={state.image_base64}
+                    />}
+            </Box>
+        )
+    }
+
+    return (
+        <>
+            <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+                <h3>You can choose options for the background</h3>
+            </Box>
+
+
+            <Box style={{border:"1px solid", borderColor:'blue'}}>
+                <Checkbox_All />
+                <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
+                    <Checkbox_Image/>
+                    <Checkbox_Video />
+
+                </Box>
+            </Box>
+
+            <Box style={{border:"1px solid", borderColor:'blue'}}>
+
 
                 <Box sx={{ display: 'flex', flexDirection: 'row', ml: 3 }}>
                     {/*== IIIIIIIII check_image_option*/}
-                    <Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
+                    {/*<Box id={'box_check_image_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>*/}
 
-                        <Checkbox_Image/>
 
-                    </Box>
+                    {/*</Box>*/}
 
                     <Box style={{ zIndex:'99', display:(state.display_box_image)?'flex':'none' }}>
 
@@ -354,43 +401,26 @@ const Settings_Part_Background: React.FC = () => {
 
                     </Box>
 
+                    <Display_Image_Uploaded />
+
                     {/*== VVVVVVVVVV check_video_option*/}
-                    <Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>
+                    {/*<Box id={'box_check_video_id'} sx={{ paddingRight:'4px', display: 'flex', justifyContent:'space-between', flexDirection: 'row' }}>*/}
 
-                        <Checkbox_Video />
+                    {/*</Box> /!*VVVVVVVVVVVVV*!/*/}
 
-                        <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
-                            <Upload_Video_Button />
-                        </Box> {/*video*/}
+                    <Box sx={{ display:(state.display_box_video)?'block':'none' }}>
+                        <Upload_Video_Button />
+                    </Box> {/*video*/}
 
-                    </Box> {/*VVVVVVVVVVVVV*/}
-
-                    <Box sx={{ display: 'flex', flexDirection: 'row',  }}>
-
-                        <Box sx={{ display: (checked[1])?'flex':'none', flexDirection: 'column',  }}>
-
-                            {(file_data_video.length==0)?'no video selected':
-                                <video  id={'#video1'}
-
-                                        src={file_data_video}
-                                        autoPlay
-                                        loop
-
-                                        width="150" height="150" controls
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
-                            }
-                        </Box>
-
-                    </Box>
+                    <Display_Video_Uploaded />
 
                 </Box>
 
 
 
             </Box>
-        </Box>
+            <p>{JSON.stringify(checked)}</p>
+        </>
 
     );
 };

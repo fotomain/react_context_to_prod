@@ -220,7 +220,6 @@ const Settings_Part_Application: React.FC = () => {
           <TabPanel value={tab_value} index={1} >
 
               <Box  sx={{marginLeft:'24px' , marginTop:'24px' }} >
-                  Item Two 222
                   <Settings_Part_Background/>
               </Box>
 
