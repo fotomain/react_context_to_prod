@@ -162,6 +162,7 @@ const Settings_Part_Background: React.FC = () => {
         setState({
             ...state,
             // react checkbox set checked trow onclick
+            display_box_color:event.target.checked,
             display_box_image:event.target.checked,
             display_box_video:event.target.checked,
         })
@@ -237,8 +238,14 @@ const Settings_Part_Background: React.FC = () => {
                 label="use all options"
                 control={
                     <Checkbox
-                        checked={checked[0] && checked[1]}
-                        indeterminate={checked[0] !== checked[1]}
+                        checked={checked[0] && checked[1] && checked[2]}
+                        indeterminate={
+                            checked[0] !== checked[1]
+                            ||
+                            checked[0] !== checked[2]
+                            ||
+                            checked[1] !== checked[2]
+                        }
                         onChange={handleChange_parent}
                     />
                 }
@@ -511,8 +518,8 @@ const Settings_Part_Background: React.FC = () => {
         )
     }
 
-    function onChange_left_right(event:any) {
-        console.log("=== onChange_left_right")
+    function onChange_color(event:any) {
+        console.log("=== onChange_color")
         let t_ev_type = (event.target.value).trim()
         console.log(t_ev_type)
         if(t_ev_type=="gradient"){
@@ -569,7 +576,7 @@ const Settings_Part_Background: React.FC = () => {
                         flex:1,
                         zIndex:'99',
                         display:(state.display_box_color)?'flex':'none',
-                        flexDirection:'row',
+                        flexDirection:'column',
                         justifyContent:'start',
                         alignItems:'center',
                         padding:'10px',
@@ -577,14 +584,26 @@ const Settings_Part_Background: React.FC = () => {
                     }}>
 
 
+                        <Box style={{
+                            ...debub_border('lightgreen'),
+                            flex:1,
+                            alignSelf:'start',
+                            zIndex:'99',
+                            display:(state.display_box_color)?'flex':'none',
+                            flexDirection:'row',
+                            justifyContent:'start',
+                            alignItems:'center',
+                            padding:'10px',
+                            gap:'10px',
+                        }}>
                         <RadioGroup row aria-label="gender" name="row-radio-buttons-group"
-                                    onChange={onChange_left_right}
+                                    onChange={onChange_color}
 
 
                                     value={state['background_data_color_value_source_type']}
                         >
                             <Box>
-                            <FormLabel sx={{flexGrow:10, marginTop:'10px', marginRight:'7px'}} component="legend">color type</FormLabel>
+                            <FormLabel sx={{flexGrow:10, marginTop:'10px', marginRight:'7px'}} component="legend">color display type</FormLabel>
                             </Box>
                             <Box>
                             <FormControlLabel
@@ -621,6 +640,11 @@ const Settings_Part_Background: React.FC = () => {
                             {/*    control={<Radio />}*/}
                             {/*    label="other"/>*/}
                         </RadioGroup>
+                        </Box>
+
+                        <Box>
+                            {'still'==state['background_data_color_value_source_type']?'still':'gradient'}
+                        </Box>
 
                     </Box>
 
