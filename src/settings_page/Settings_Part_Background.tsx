@@ -24,8 +24,8 @@ import {log} from "util";
 
 const Settings_Part_Background: React.FC = () => {
 
-    // const debub_mode = true
-    const debub_mode = false
+    const debub_mode = true
+    // const debub_mode = false
 
     const debub_border = (props?:any) => {
 
@@ -569,7 +569,8 @@ const Settings_Part_Background: React.FC = () => {
                         flex:1,
                         zIndex:'99',
                         display:(state.display_box_color)?'flex':'none',
-                        flexDirection:'column',
+                        flexDirection:'row',
+                        justifyContent:'start',
                         alignItems:'center',
                         padding:'10px',
                         gap:'10px',
@@ -582,8 +583,13 @@ const Settings_Part_Background: React.FC = () => {
 
                                     value={state['background_data_color_value_source_type']}
                         >
-                            <FormLabel sx={{marginTop:'10px', marginRight:'7px'}} component="legend">show at </FormLabel>
-                            <FormControlLabel labelPlacement="end" value="still"
+                            <Box>
+                            <FormLabel sx={{flexGrow:10, marginTop:'10px', marginRight:'7px'}} component="legend">color type</FormLabel>
+                            </Box>
+                            <Box>
+                            <FormControlLabel
+
+                                    labelPlacement="end" value="still"
                                               control={
                                                   <Radio
                                                       sx={{
@@ -594,7 +600,9 @@ const Settings_Part_Background: React.FC = () => {
                                                   />}
                                               label="still"
                             />
-                            <FormControlLabel labelPlacement="end" value="gradient"
+                            <FormControlLabel
+
+                                labelPlacement="end" value="gradient"
                                               control={
                                                   <Radio
                                                       sx={{
@@ -604,7 +612,9 @@ const Settings_Part_Background: React.FC = () => {
                                                       }}
                                                   />}
 
-                                              label="gradient" />
+                                              label="gradient"
+                            />
+                            </Box>
                             {/*<FormControlLabel*/}
                             {/*    value="disabled"*/}
                             {/*    disabled*/}
