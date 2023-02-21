@@ -8,6 +8,14 @@ export default function logrecsReducer(
 ): TGloabal_props {
     switch (activity.type) {
 
+        case "SETTER_DEVICE": {
+            console.log("=== SETTER_DEVICE reducer start")
+            console.log(activity.global_new_data)
+                return {
+                    ...now_props,
+                    current_device: activity.global_new_data.current_device,
+                };
+        }
         case "SETTER_APPLICATION": {
             console.log("=== SETTER_APPLICATION reducer start")
             console.log(activity.global_new_data)

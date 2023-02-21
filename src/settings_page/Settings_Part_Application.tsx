@@ -111,6 +111,7 @@ const Settings_Part_Application: React.FC = () => {
               }} >
               <p>global_props.current_application.title.text {global_props.current_application.title.text}</p>
               <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
+              <p>global_props.current_application.title.mode_position {global_props.current_application.title.mode_position}</p>
                   <Box sx={{p:'24px'}}>
 
                       <TextareaAutosize

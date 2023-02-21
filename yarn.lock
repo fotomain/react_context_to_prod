@@ -1115,6 +1115,11 @@
   dependencies:
     "tslib" "^2.1.0"
 
+"@capacitor/device@^4.1.0":
+  "integrity" "sha512-BlcYb6e6m+vC1SxeyUDIUGfuNXdKEcpFPDCs/kxk2SByFc/BkvXeoy4NjY4qmTderGELofX9bta5Iy9JV7rGUg=="
+  "resolved" "https://registry.npmjs.org/@capacitor/device/-/device-4.1.0.tgz"
+  "version" "4.1.0"
+
 "@capacitor/haptics@4.1.0":
   "integrity" "sha512-gAIFy50e1VZPdokRFLkl8Y+yZYB3e4brd5yu9DRShbWbheruwU34TxtG5C1NANvq4mbXd3tMXzBi59Q5JFyTHA=="
   "resolved" "https://registry.npmjs.org/@capacitor/haptics/-/haptics-4.1.0.tgz"

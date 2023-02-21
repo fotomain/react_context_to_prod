@@ -25,11 +25,18 @@ initial_setings.current_application.title.text='555 All Best Posts' // image, co
 initial_setings.current_application.title.mode_show=true
 initial_setings.current_application.title.mode_position='left' // left middle rigth
 
-initial_setings.current_application.background={}
 
 
 // TODO background_color_show background_color_show
 //=== DOC https://angrytools.com/gradient/
+initial_setings.current_device={}
+initial_setings.current_device.info='not defined'
+initial_setings.current_device.orientation='not defined'
+initial_setings.current_device.screen='not defined'
+initial_setings.current_device.is_online='not defined' //navigator.online
+
+initial_setings.current_application.background={}
+
 initial_setings.current_application.background.background_color_show=false // default=image, color, video
 initial_setings.current_application.background.background_data_color_value_source_type='' //still gradient
 initial_setings.current_application.background.background_data_color_value=''

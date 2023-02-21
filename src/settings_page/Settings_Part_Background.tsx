@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {Globals_context} from "../context_globals_logrec/globals_context";
-import {Alert, Box, Button, Card, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {Alert, Box, Button, Card, FormLabel, Radio, RadioGroup, TextareaAutosize} from "@mui/material";
 
 import { Database, Storage } from '@ionic/storage';
 import {useEffect, useState} from "react";
@@ -705,6 +705,15 @@ const Settings_Part_Background: React.FC = () => {
             <p>image {JSON.stringify(global_props.current_application.background.background_data_image_value.length)}</p>
             <p>video {JSON.stringify(global_props.current_application.background.background_data_video_value.length)}</p>
             <p>show  {JSON.stringify(global_props.current_application.background.background_media_video_show)}</p>
+            {/*<p>show  {JSON.stringify(global_props.current_device)}</p>*/}
+
+            <TextareaAutosize
+                aria-label="empty textarea"
+                placeholder="Empty"
+                style={{ width: 500 }}
+                value={"device = " + JSON.stringify(global_props.current_device) }
+            />
+
             <p>{JSON.stringify(checked)}</p>
         </>
 

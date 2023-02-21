@@ -2,6 +2,7 @@
 export interface ILogrecsActions {
     type:     "SETTER_USER"
             | "SETTER_APPLICATION"
+            | "SETTER_DEVICE"
 
             | "TOGGLE_TODO"
             | "DELETE_TODO"
@@ -26,6 +27,7 @@ export interface TGloabal_props {
     logrecs: Array<T1_logrec>;
     current_user: any; //C1_current_user;
     current_application: any;
+    current_device: any;
 }
 
 export interface T1_logrec {

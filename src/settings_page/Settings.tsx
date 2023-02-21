@@ -29,6 +29,15 @@ import DropFilesZone from "./DropFilesZone";
 
 const Settings: React.FC = () => {
 
+
+
+
+    window.addEventListener('devicechange', (event) => {
+
+        console.log("=== devicechange ",event)
+
+    });
+
     const { global_props, global_dispatch } = React.useContext(Globals_context);
 
     const [value, setValue] = React.useState(0);
