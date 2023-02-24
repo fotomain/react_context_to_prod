@@ -8,8 +8,6 @@ import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import {useEffect} from "react";
 import {Button} from "@mui/material";
 //============ HOME
-//============ HOME
-//============ HOME
 const GoogleSignIn: React.FC = () => {
 
     const { global_props, global_dispatch } = React.useContext(Globals_context);

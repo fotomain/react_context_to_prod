@@ -1,5 +1,4 @@
 call npm install
-call npm install -g ionic
 
 call npm i jeep-sqlite/loader
 call npm i @capacitor/core
