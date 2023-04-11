@@ -1,11 +1,12 @@
 
 
 import * as React from "react";
+import {useEffect, useState} from "react";
+import {Database, Storage} from "@ionic/storage";
+
 import userReducer from "./globals_reducer";
 import {TGloabal_context} from "./globals_types";
 import {initial_setings} from "./globals_initial_setings";
-import {useEffect, useState} from "react";
-import {Database, Storage} from "@ionic/storage";
 
 import { Device } from '@capacitor/device';
 

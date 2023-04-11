@@ -7,7 +7,18 @@ import {Globals_context} from "../context_globals_logrec/globals_context";
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import {useEffect} from "react";
 import {Button} from "@mui/material";
-//============ HOME 111
+//============ INSTALL
+// capacitor.config.json
+// "GoogleAuth": {
+//     "scopes": ["profile", "email"],
+//         "clientId": "47192713780-k5e4brld4r7oplndec5fi5kcdra765s7.apps.googleusercontent.com",
+//         "serverClientId": "47192713780-k5e4brld4r7oplndec5fi5kcdra765s7.apps.googleusercontent.com",
+//         "grantOfflineAccess": true,
+//         "forceCodeForRefreshToken": true
+// }
+
+
+
 const GoogleSignIn: React.FC = () => {
 
     const { global_props, global_dispatch } = React.useContext(Globals_context);
