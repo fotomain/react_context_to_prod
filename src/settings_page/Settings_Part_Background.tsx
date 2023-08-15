@@ -5,15 +5,14 @@
 // TODO
 //  initial checked from state = background_media_video_show
 
-
 import * as React from 'react';
 import {Globals_context} from "../context_globals_logrec/globals_context";
-import {Alert, Box, Button, Card, FormLabel, Radio, RadioGroup, TextareaAutosize} from "@mui/material";
+import { Box, Button, Card, FormLabel, Radio, RadioGroup, TextareaAutosize} from "@mui/material";
 
-import { Database, Storage } from '@ionic/storage';
+
 import {useEffect, useState} from "react";
 
-import { FileError, FileRejection, useDropzone } from 'react-dropzone';
+import { useDropzone } from 'react-dropzone';
 
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
