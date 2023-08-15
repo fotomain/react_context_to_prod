@@ -1,5 +1,4 @@
 
-
 // TODO
 // TODO
 //  initial checked from state = background_media_image_show
@@ -99,8 +98,11 @@ const Settings_Part_Background: React.FC = () => {
 
             if(file_data) {
 
-                let image = document.createElement('img');
-                image.src = file_data;
+                setState({...state, "file1": file_data});
+
+                // let image = document.createElement('img');
+                // image.src = file_data;
+
 
                 const tdata = global_props.current_application
                 tdata.background.background_media_image_show = true
@@ -125,7 +127,7 @@ const Settings_Part_Background: React.FC = () => {
         console.log("=== getFile ",e)
         if(e.target && e.target.files) {
             const file1 = e.target.files[0];
-            setState({...state, "file1": file1});
+            // setState({...state, "file1": file1});
             file_get_from_input_target(file1);
         }
     };
@@ -538,6 +540,14 @@ const Settings_Part_Background: React.FC = () => {
         })
 
     }
+
+
+    useEffect(() => {
+        alert('=== state.file1 '+state.file1?.substr(0,20))
+        return () => {
+
+        };
+    }, [state.file1]);
 
 
     return (
