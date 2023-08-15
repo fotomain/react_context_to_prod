@@ -134,17 +134,19 @@ const Settings_Part_Application: React.FC = () => {
 
                       <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
 
-                      <FormControlLabel
-                          control={
-                              // <Switch checked={state.mode_show} onChange={handleChange} name="slides_mirrored" />
-                              <Switch checked={state['current_application.title.mode_show']}
-                                  onChange={(e)=>{
-                                  console.log(e)
-                                  setState({...state, 'current_application.title.mode_show': !state['current_application.title.mode_show']})
-                              }}  />
-                          }
-                          label="Show"
-                      />
+                      { inputProps: { 'aria-label': 'Checkbox demo' }
+
+                      {/*<FormControlLabel*/}
+                      {/*    control={*/}
+                      {/*        // <Switch checked={state.mode_show} onChange={handleChange} name="slides_mirrored" />*/}
+                      {/*        <Switch checked={state['current_application.title.mode_show']}*/}
+                      {/*            onChange={(e)=>{*/}
+                      {/*            console.log(e)*/}
+                      {/*            setState({...state, 'current_application.title.mode_show': !state['current_application.title.mode_show']})*/}
+                      {/*        }}  />*/}
+                      {/*    }*/}
+                      {/*    label="Show"*/}
+                      {/*/>*/}
 
                       <fieldset disabled={!state['current_application.title.mode_show']}
                                 style={

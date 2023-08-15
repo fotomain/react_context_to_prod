@@ -231,7 +231,6 @@ const Settings_Part_Background: React.FC = () => {
 
     };
 
-
     const Checkbox_All = () => {
         return(
             <FormControlLabel
