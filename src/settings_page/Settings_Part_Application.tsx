@@ -134,7 +134,7 @@ const Settings_Part_Application: React.FC = () => {
 
                       <Divider style={{marginTop:'10px', marginBottom:'10px'}}/>
 
-                      { inputProps: { 'aria-label': 'Checkbox demo' }
+                      {/*{ inputProps: { 'aria-label': 'Checkbox demo' }*/}
 
                       {/*<FormControlLabel*/}
                       {/*    control={*/}

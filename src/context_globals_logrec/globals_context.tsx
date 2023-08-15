@@ -109,10 +109,11 @@ export function Globals_Provider(props: IProps) {
 
 
 
-    return
+    return (
         <Globals_context.Provider
             value={value}
         >
             {props.children}
-        </Globals_context.Provider>;
+        </Globals_context.Provider>
+    )
 }

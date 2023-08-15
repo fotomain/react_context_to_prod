@@ -1,4 +1,4 @@
-call npm install
+call npm install --legacy-peer-deps
 
 call npm i jeep-sqlite/loader
 call npm i @capacitor/core

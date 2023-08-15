@@ -67,7 +67,7 @@ const Settings_Part_Background: React.FC = () => {
         display_box_color:false,
     });
 
-    const getFileHeader = (file:any) => {
+    const file_get_from_input_target = (file:any) => {
         const headerReader = new FileReader();
         headerReader.onloadend = function (e:any) {
             if(e.target && e.target.result) {
@@ -80,7 +80,7 @@ const Settings_Part_Background: React.FC = () => {
                     ...state,
                     'header1': header
                 });
-                const ft = fileType(header)
+                const ft = file_type(header)
                 console.log('=== header ', header)
                 console.log("=== ft ",ft)
             }
@@ -126,11 +126,11 @@ const Settings_Part_Background: React.FC = () => {
         if(e.target && e.target.files) {
             const file1 = e.target.files[0];
             setState({...state, "file1": file1});
-            getFileHeader(file1);
+            file_get_from_input_target(file1);
         }
     };
 
-    const fileType = (value:any) => {
+    const file_type = (value:any) => {
         switch (value) {
             case "89504e47":
                 return "image/png";
